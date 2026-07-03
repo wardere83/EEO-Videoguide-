@@ -42,7 +42,11 @@
       overflow: hidden;
       border: 1px solid #334155;
     }
-    video { width: 100%; height: 100%; object-fit: contain; background: #000; }
+    .video-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
     footer { margin-top: 2rem; color: #64748b; font-size: 0.875rem; }
   </style>
 </head>
@@ -51,11 +55,13 @@
     <h1>EEO Video Guide</h1>
     <p class="tagline">EEO IBP Grant Initiative</p>
     <div class="video-wrap">
-      <video controls preload="metadata" playsinline>
-        <source src="058C78C5-4B8F-406E-BD92-B807746517CF.MOV" type="video/quicktime">
-        Your browser does not support embedded video. You can
-        <a href="058C78C5-4B8F-406E-BD92-B807746517CF.MOV">download the video</a> instead.
-      </video>
+      <iframe
+        src="https://www.youtube.com/embed/FqxEwPJ2ntE"
+        title="EEO Video Guide"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="lazy">
+      </iframe>
     </div>
     <footer>eeodashboard.io</footer>
   </main>
