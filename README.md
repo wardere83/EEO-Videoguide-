@@ -1,4 +1,3 @@
-# EEO-Videoguide-
-EEO IBP Grant Initiative Report
+# EEO Video Guide
 
-Published at: https://eeodashboard.io
+EEO IBP Grant Initiative video guide site, hosted at [eeodashboard.io](https://eeodashboard.io).
