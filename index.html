@@ -3,59 +3,153 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EEO Video Guide</title>
+  <title>EEO IBP Grant Report</title>
   <style>
-    :root { color-scheme: light dark; }
+    :root {
+      color-scheme: light;
+      --navy: #002E5D;
+      --blue: #0A5AA2;
+      --gold: #F5B301;
+      --ink: #16202E;
+      --muted: #5A6675;
+      --bg: #FFFFFF;
+      --panel: #F4F6F9;
+      --line: #E4E8EE;
+    }
     * { box-sizing: border-box; }
+    html, body { margin: 0; }
     body {
-      margin: 0;
       min-height: 100vh;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
+      background: var(--bg);
+      color: var(--ink);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: #0f172a;
-      color: #e2e8f0;
-      padding: 2rem;
+      -webkit-font-smoothing: antialiased;
     }
+
+    /* Thin brand accent bar */
+    .accent-bar { height: 4px; background: var(--gold); }
+
+    /* Header / logo lockup */
+    .site-header {
+      display: flex;
+      justify-content: center;
+      padding: 1.75rem 1.5rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand-img { max-height: 56px; width: auto; }
+    .brand-lockup { display: flex; align-items: center; gap: 0.85rem; }
+    .emblem {
+      flex: none;
+      width: 46px; height: 46px;
+      border-radius: 10px;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .emblem svg { width: 26px; height: 26px; }
+    .wordmark { display: flex; flex-direction: column; line-height: 1.15; text-align: left; }
+    .wm-main {
+      font-size: 1.02rem; font-weight: 700; color: var(--navy);
+      letter-spacing: -0.01em;
+    }
+    .wm-sub {
+      font-size: 0.72rem; font-weight: 600; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.16em; margin-top: 2px;
+    }
+
+    /* Main content */
     main {
-      max-width: 720px;
+      flex: 1;
       width: 100%;
-      text-align: center;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 4rem;
+    }
+    .hero { text-align: center; margin-bottom: 2.75rem; }
+    .eyebrow {
+      margin: 0 0 0.9rem;
+      font-size: 0.78rem; font-weight: 700; color: var(--blue);
+      text-transform: uppercase; letter-spacing: 0.2em;
     }
     h1 {
-      font-size: clamp(1.75rem, 5vw, 2.75rem);
-      margin: 0 0 0.5rem;
-      letter-spacing: -0.02em;
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 800; color: var(--navy);
+      letter-spacing: -0.025em; line-height: 1.05;
     }
-    p.tagline {
-      color: #94a3b8;
-      font-size: 1.1rem;
-      margin: 0 0 2rem;
+    .subtitle {
+      margin: 1rem auto 0;
+      max-width: 620px;
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      color: var(--muted); line-height: 1.5;
     }
+    .divider {
+      width: 64px; height: 3px; margin: 1.6rem auto 0;
+      background: var(--gold); border-radius: 3px;
+    }
+
+    /* Video */
     .video-wrap {
       position: relative;
-      padding-top: 56.25%;
+      width: 100%;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding-top: min(56.25%, 585px);
       background: #000;
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
-      border: 1px solid #334155;
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 60px -22px rgba(0, 46, 93, 0.35);
     }
     .video-wrap iframe {
-      border: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%; border: 0;
     }
-    footer { margin-top: 2rem; color: #64748b; font-size: 0.875rem; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      color: var(--muted); font-size: 0.85rem;
+    }
+    footer a { color: var(--blue); text-decoration: none; font-weight: 600; }
+    footer a:hover { text-decoration: underline; }
+    footer .sep { margin: 0 0.6rem; opacity: 0.5; }
   </style>
 </head>
 <body>
+  <div class="accent-bar"></div>
+
+  <header class="site-header">
+    <!-- Drop the official logo in the repo as "cccco-logo.png" and it replaces the lockup below automatically. -->
+    <img id="brand-img" class="brand-img"
+         src="cccco-logo.png"
+         alt="California Community Colleges Chancellor's Office"
+         style="display:none"
+         onload="document.getElementById('brand-fallback').style.display='none'; this.style.display='block';">
+    <div id="brand-fallback" class="brand-lockup">
+      <span class="emblem" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="#F5B301" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2 L14.9 8.6 L22 9.2 L16.5 13.9 L18.2 21 L12 17.3 L5.8 21 L7.5 13.9 L2 9.2 L9.1 8.6 Z"/>
+        </svg>
+      </span>
+      <span class="wordmark">
+        <span class="wm-main">California Community Colleges</span>
+        <span class="wm-sub">Chancellor&rsquo;s Office</span>
+      </span>
+    </div>
+  </header>
+
   <main>
-    <h1>EEO Video Guide</h1>
-    <p class="tagline">EEO IBP Grant Initiative</p>
+    <div class="hero">
+      <p class="eyebrow">Equal Employment Opportunity</p>
+      <h1>EEO IBP Grant Report</h1>
+      <p class="subtitle">Institutional Best Practices Grant Initiative &middot; California Community Colleges Chancellor&rsquo;s Office</p>
+      <div class="divider"></div>
+    </div>
+
     <div class="video-wrap">
       <iframe
         src="https://customer-cd6q9846m6243pi2.cloudflarestream.com/390557b908b51626b552499f7799ac96/iframe?poster=https%3A%2F%2Fcustomer-cd6q9846m6243pi2.cloudflarestream.com%2F390557b908b51626b552499f7799ac96%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600"
@@ -64,7 +158,12 @@
         allowfullscreen="true">
       </iframe>
     </div>
-    <footer>eeodashboard.io</footer>
   </main>
+
+  <footer>
+    California Community Colleges Chancellor&rsquo;s Office
+    <span class="sep">&middot;</span>
+    <a href="https://eeodashboard.io">eeodashboard.io</a>
+  </footer>
 </body>
 </html>
