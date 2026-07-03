@@ -35,18 +35,19 @@
     }
     .video-wrap {
       position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
+      padding-top: 56.25%;
       background: #000;
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid #334155;
     }
     .video-wrap iframe {
-      width: 100%;
-      height: 100%;
       border: none;
-      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
     }
     footer { margin-top: 2rem; color: #64748b; font-size: 0.875rem; }
   </style>
@@ -57,11 +58,10 @@
     <p class="tagline">EEO IBP Grant Initiative</p>
     <div class="video-wrap">
       <iframe
-        src="https://www.youtube-nocookie.com/embed/FqxEwPJ2ntE?rel=0&modestbranding=1&showinfo=0&controls=1&color=white"
-        title="EEO Video Guide"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-        allowfullscreen
-        loading="lazy">
+        src="https://customer-cd6q9846m6243pi2.cloudflarestream.com/390557b908b51626b552499f7799ac96/iframe?poster=https%3A%2F%2Fcustomer-cd6q9846m6243pi2.cloudflarestream.com%2F390557b908b51626b552499f7799ac96%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600"
+        loading="lazy"
+        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+        allowfullscreen="true">
       </iframe>
     </div>
     <footer>eeodashboard.io</footer>
