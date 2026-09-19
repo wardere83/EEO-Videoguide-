@@ -1,5 +1,8 @@
-# Large local media — the site streams video from Cloudflare Stream, not from the repo.
-*.mov
+node_modules/
+dist/
+playwright-report/
+test-results/
 *.mp4
-*.m4v
+*.mov
 .DS_Store
+!public/media/eeo-initiative.mp4
