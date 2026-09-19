@@ -163,6 +163,8 @@
       color: var(--muted);
     }
     .player-actions .hint { margin: 0; }
+    .player-actions .controls { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .action-btn:link, .action-btn:visited { text-decoration: none; }
     .player-actions .hint a { color: var(--blue); font-weight: 600; }
     .action-btn {
       display: inline-flex;
@@ -180,6 +182,38 @@
     }
     .action-btn:hover { background: #E9EEF5; border-color: #CFD8E3; }
     .action-btn svg { width: 15px; height: 15px; flex: none; }
+
+    .copy-fallback {
+      max-width: 1280px;
+      margin: 0.85rem auto 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 0.75rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .copy-fallback input {
+      flex: 1 1 18rem;
+      min-width: 0;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #CFD8E3;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 0.88rem;
+    }
+
+    .sr-status {
+      position: absolute;
+      width: 1px; height: 1px;
+      margin: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
 
     /* Footer */
     footer {
@@ -245,6 +279,17 @@
         <a href="https://customer-cd6q9846m6243pi2.cloudflarestream.com/390557b908b51626b552499f7799ac96/iframe"
            target="_blank" rel="noopener">Open the video in a new tab</a>.
       </p>
+      <span class="controls">
+      <a class="action-btn" href="transcript.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <path d="M14 2v6h6"></path>
+          <path d="M8 13h8"></path>
+          <path d="M8 17h5"></path>
+        </svg>
+        Read the transcript
+      </a>
       <button type="button" class="action-btn" id="copy-link" data-label="Copy link to this page">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -253,8 +298,13 @@
         </svg>
         <span id="copy-link-label">Copy link to this page</span>
       </button>
+      </span>
     </div>
-    <p aria-live="polite" class="sr-status" id="copy-status" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;"></p>
+    <div class="copy-fallback" id="copy-fallback" hidden>
+      <label for="copy-fallback-input">Copy this link:</label>
+      <input type="text" id="copy-fallback-input" readonly spellcheck="false">
+    </div>
+    <p aria-live="polite" class="sr-status" id="copy-status"></p>
   </main>
 
   <footer>
@@ -268,26 +318,37 @@
       var btn = document.getElementById('copy-link');
       var label = document.getElementById('copy-link-label');
       var status = document.getElementById('copy-status');
+      var fallback = document.getElementById('copy-fallback');
+      var field = document.getElementById('copy-fallback-input');
       if (!btn) return;
 
-      function announce(text) {
+      var announceTimer, resetTimer;
+
+      // Short text keeps the button from resizing; the spoken message can be fuller.
+      function announce(text, spoken) {
         label.textContent = text;
-        status.textContent = text;
-        setTimeout(function () { label.textContent = btn.dataset.label; }, 2200);
+        clearTimeout(announceTimer);
+        clearTimeout(resetTimer);
+        // Clearing first makes screen readers re-announce an identical message,
+        // which is what happens when the button is pressed twice in a row.
+        status.textContent = '';
+        announceTimer = setTimeout(function () { status.textContent = spoken || text; }, 60);
+        resetTimer = setTimeout(function () { label.textContent = btn.dataset.label; }, 2200);
       }
 
-      function fallbackCopy(text) {
-        var field = document.createElement('textarea');
+      // Last resort: put the URL on screen, selected, so it can be copied by
+      // hand. Removing an off-screen field before saying "press Ctrl+C" left
+      // nothing selected and nothing to copy.
+      function offerManualCopy(text) {
+        if (!fallback || !field) return false;
+        fallback.hidden = false;
         field.value = text;
-        field.setAttribute('readonly', '');
-        field.style.position = 'absolute';
-        field.style.left = '-9999px';
-        document.body.appendChild(field);
+        field.focus();
         field.select();
-        var ok = false;
-        try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
-        document.body.removeChild(field);
-        return ok;
+        var copied = false;
+        try { copied = document.execCommand('copy'); } catch (e) { copied = false; }
+        if (copied) fallback.hidden = true;
+        return copied;
       }
 
       btn.addEventListener('click', function () {
@@ -299,8 +360,15 @@
         function finish(copied) {
           if (settled) return;
           settled = true;
-          if (copied) announce('Link copied');
-          else announce(fallbackCopy(url) ? 'Link copied' : 'Press Ctrl+C to copy');
+          if (copied) {
+            if (fallback) fallback.hidden = true;
+            announce('Link copied');
+          } else {
+            announce(
+              offerManualCopy(url) ? 'Link copied' : 'Copy it manually',
+              'Link selected below \u2014 copy it with your keyboard'
+            );
+          }
         }
 
         if (navigator.clipboard && window.isSecureContext) {
