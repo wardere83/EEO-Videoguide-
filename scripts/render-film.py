@@ -12,7 +12,7 @@ OUT = ROOT / "public/media"
 FONTS = ROOT / "public/fonts"
 FFMPEG = os.environ.get("FFMPEG") or str(ROOT / "node_modules/ffmpeg-static/ffmpeg")
 W, H, FPS = 1280, 720, 24
-WHITE, GOLD, MIST, CYAN = (248, 250, 252), (255, 182, 0), (184, 205, 225), (96, 201, 241)
+WHITE, GOLD, MIST, CYAN = (248, 250, 252), (255, 182, 0), (184, 205, 225), (64, 180, 229)
 
 regular = lambda size: ImageFont.truetype(str(FONTS / "font-2.ttf"), size)
 serif = lambda size: ImageFont.truetype(str(FONTS / "font-0.ttf"), size)
@@ -125,7 +125,7 @@ def lower_gradient(im, strength=.75, height=330):
 
 
 def title_lockup(draw, kicker, title, detail, opacity, x=86, y=410, width=690):
-    shadow_text(draw, (x, y), kicker.upper(), bold(14), alpha(GOLD, opacity))
+    shadow_text(draw, (x, y), kicker.upper(), bold(14), alpha(CYAN, opacity))
     title_font = serif(66)
     cursor = y + 42
     for line in wrap(draw, title, title_font, width):
@@ -136,7 +136,7 @@ def title_lockup(draw, kicker, title, detail, opacity, x=86, y=410, width=690):
 
 
 def number_lockup(draw, amount, label, detail, opacity, x=90, y=285):
-    shadow_text(draw, (x, y), label.upper(), bold(14), alpha(GOLD, opacity))
+    shadow_text(draw, (x, y), label.upper(), bold(14), alpha(CYAN, opacity))
     shadow_text(draw, (x, y + 48), amount, serif(104), alpha(WHITE, opacity), shadow=220)
     draw.line((x, y + 154, x + 112, y + 154), fill=alpha(GOLD, opacity), width=4)
     shadow_text(draw, (x, y + 181), detail, regular(19), alpha(MIST, opacity), shadow=210)
@@ -184,7 +184,7 @@ def current_cycle(local, duration, global_t):
     draw = ImageDraw.Draw(im, "RGBA")
     opacity = fade_window(local, duration) * ease(local/1.0)
     shadow_text(draw, (640, 525), "$1.4M", serif(92), alpha(WHITE, opacity), anchor="mm", shadow=230)
-    shadow_text(draw, (640, 588), "ELEVEN DISTRICTS · 2026–28", bold(15), alpha(GOLD, opacity), anchor="mm", shadow=220)
+    shadow_text(draw, (640, 588), "ELEVEN DISTRICTS · 2026–28", bold(15), alpha(CYAN, opacity), anchor="mm", shadow=220)
     shadow_text(draw, (640, 622), "Every award visible. Every project connected.", regular(17), alpha(MIST, opacity), anchor="mm", shadow=220)
     return finish_scene(im, local, duration, global_t)
 
@@ -195,7 +195,7 @@ def combined(local, duration, global_t):
     draw = ImageDraw.Draw(im, "RGBA")
     opacity = fade_window(local, duration) * ease(local/1.0)
     shadow_text(draw, (640, 424), "$7.05M", serif(122), alpha(WHITE, opacity), anchor="mm", shadow=240)
-    shadow_text(draw, (640, 500), "COMPETITIVE AWARDS SINCE LAUNCH", bold(15), alpha(GOLD, opacity), anchor="mm", shadow=230)
+    shadow_text(draw, (640, 500), "COMPETITIVE AWARDS SINCE LAUNCH", bold(15), alpha(CYAN, opacity), anchor="mm", shadow=230)
     shadow_text(draw, (640, 545), "32 award selections · two cycles", regular(20), alpha(MIST, opacity), anchor="mm", shadow=220)
     return finish_scene(im, local, duration, global_t)
 
