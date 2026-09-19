@@ -147,8 +147,6 @@ export function Video({ showChapters = false }: { showChapters?: boolean }) {
         ))}
       </div>
 
-      <DistrictGraph onEnterFilm={() => seek(54)} />
-
       <section className="funding-story" aria-labelledby="funding-title">
         <div className="funding-intro">
           <p className="eyebrow">Verified funding history</p>
@@ -181,6 +179,8 @@ export function Video({ showChapters = false }: { showChapters?: boolean }) {
           </div>
         </div>
       </section>
+
+      <DistrictGraph onEnterFilm={() => seek(54)} />
 
       {showChapters && (
         <details className="transcript">

@@ -83,10 +83,10 @@ test("initiative priorities, district award graph, and funding story are interac
   await expect(
     page.getByRole("link", { name: "Grantees", exact: true }),
   ).toHaveCount(0);
-  await expect(page.locator(".network-node")).toHaveCount(11);
-  await expect(page.locator(".network-node img")).toHaveCount(11);
+  await expect(page.locator(".award-column")).toHaveCount(11);
+  await expect(page.locator(".award-column img")).toHaveCount(11);
   expect(
-    await page.locator(".network-node img").evaluateAll((images) =>
+    await page.locator(".award-column img").evaluateAll((images) =>
       images.every((image) => (image as HTMLImageElement).naturalWidth > 0),
     ),
   ).toBe(true);
