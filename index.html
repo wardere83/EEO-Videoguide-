@@ -163,6 +163,8 @@
       color: var(--muted);
     }
     .player-actions .hint { margin: 0; }
+    .player-actions .controls { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .action-btn:link, .action-btn:visited { text-decoration: none; }
     .player-actions .hint a { color: var(--blue); font-weight: 600; }
     .action-btn {
       display: inline-flex;
@@ -245,6 +247,17 @@
         <a href="https://customer-cd6q9846m6243pi2.cloudflarestream.com/390557b908b51626b552499f7799ac96/iframe"
            target="_blank" rel="noopener">Open the video in a new tab</a>.
       </p>
+      <span class="controls">
+      <a class="action-btn" href="transcript.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <path d="M14 2v6h6"></path>
+          <path d="M8 13h8"></path>
+          <path d="M8 17h5"></path>
+        </svg>
+        Read the transcript
+      </a>
       <button type="button" class="action-btn" id="copy-link" data-label="Copy link to this page">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -253,6 +266,7 @@
         </svg>
         <span id="copy-link-label">Copy link to this page</span>
       </button>
+      </span>
     </div>
     <p aria-live="polite" class="sr-status" id="copy-status" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;"></p>
   </main>
