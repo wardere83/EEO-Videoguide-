@@ -1,0 +1,5 @@
+# Large local media — the site streams video from Cloudflare Stream, not from the repo.
+*.mov
+*.mp4
+*.m4v
+.DS_Store

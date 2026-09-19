@@ -3,7 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EEO IBP Grant Report</title>
+  <title>EEO IBP Grant Report | California Community Colleges Chancellor's Office</title>
+
+  <meta name="description" content="Video report on the Equal Employment Opportunity Institutional Best Practices (IBP) Grant Initiative for the California Community Colleges Chancellor's Office.">
+  <link rel="canonical" href="https://eeodashboard.io/">
+  <meta name="theme-color" content="#002E5D">
+
+  <!-- Social / email link previews -->
+  <meta property="og:type" content="video.other">
+  <meta property="og:site_name" content="EEO IBP Grant Initiative">
+  <meta property="og:title" content="EEO IBP Grant Report">
+  <meta property="og:description" content="Institutional Best Practices Grant Initiative · California Community Colleges Chancellor's Office">
+  <meta property="og:url" content="https://eeodashboard.io/">
+  <meta property="og:image" content="https://customer-cd6q9846m6243pi2.cloudflarestream.com/390557b908b51626b552499f7799ac96/thumbnails/thumbnail.jpg?time=&height=600">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EEO IBP Grant Report">
+  <meta name="twitter:description" content="Institutional Best Practices Grant Initiative · California Community Colleges Chancellor's Office">
+  <meta name="twitter:image" content="https://customer-cd6q9846m6243pi2.cloudflarestream.com/390557b908b51626b552499f7799ac96/thumbnails/thumbnail.jpg?time=&height=600">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%23002E5D'/%3E%3Cpath d='M12 4.5 L14.3 9.7 L20 10.2 L15.6 13.9 L17 19.5 L12 16.6 L7 19.5 L8.4 13.9 L4 10.2 L9.7 9.7 Z' fill='%23F5B301'/%3E%3C/svg%3E">
+
   <style>
     :root {
       color-scheme: light;
@@ -27,6 +46,30 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
+
+    /* Visible keyboard focus everywhere (WCAG 2.4.7) */
+    :focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -120%);
+      z-index: 10;
+      padding: 0.6rem 1.1rem;
+      background: var(--navy);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 0 0 8px 8px;
+      text-decoration: none;
+      transition: transform 0.15s ease;
+    }
+    .skip-link:focus { transform: translate(-50%, 0); }
 
     /* Thin brand accent bar */
     .accent-bar { height: 4px; background: var(--gold); }
@@ -107,6 +150,37 @@
       width: 100%; height: 100%; border: 0;
     }
 
+    /* Utility row under the player */
+    .player-actions {
+      max-width: 1280px;
+      margin: 1.1rem auto 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem 1.25rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .player-actions .hint { margin: 0; }
+    .player-actions .hint a { color: var(--blue); font-weight: 600; }
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--panel);
+      color: var(--navy);
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .action-btn:hover { background: #E9EEF5; border-color: #CFD8E3; }
+    .action-btn svg { width: 15px; height: 15px; flex: none; }
+
     /* Footer */
     footer {
       border-top: 1px solid var(--line);
@@ -117,9 +191,14 @@
     footer a { color: var(--blue); text-decoration: none; font-weight: 600; }
     footer a:hover { text-decoration: underline; }
     footer .sep { margin: 0 0.6rem; opacity: 0.5; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#video">Skip to the video</a>
   <div class="accent-bar"></div>
 
   <header class="site-header">
@@ -150,14 +229,32 @@
       <div class="divider"></div>
     </div>
 
-    <div class="video-wrap">
+    <div class="video-wrap" id="video">
       <iframe
+        title="EEO IBP Grant Report video"
         src="https://customer-cd6q9846m6243pi2.cloudflarestream.com/390557b908b51626b552499f7799ac96/iframe?poster=https%3A%2F%2Fcustomer-cd6q9846m6243pi2.cloudflarestream.com%2F390557b908b51626b552499f7799ac96%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600"
         loading="lazy"
         allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
         allowfullscreen="true">
       </iframe>
     </div>
+
+    <div class="player-actions">
+      <p class="hint">
+        Player not loading on your campus network?
+        <a href="https://customer-cd6q9846m6243pi2.cloudflarestream.com/390557b908b51626b552499f7799ac96/iframe"
+           target="_blank" rel="noopener">Open the video in a new tab</a>.
+      </p>
+      <button type="button" class="action-btn" id="copy-link" data-label="Copy link to this page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.8 1.7"></path>
+          <path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.8-1.7"></path>
+        </svg>
+        <span id="copy-link-label">Copy link to this page</span>
+      </button>
+    </div>
+    <p aria-live="polite" class="sr-status" id="copy-status" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;"></p>
   </main>
 
   <footer>
@@ -165,5 +262,62 @@
     <span class="sep">&middot;</span>
     <a href="https://eeodashboard.io">eeodashboard.io</a>
   </footer>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('copy-link');
+      var label = document.getElementById('copy-link-label');
+      var status = document.getElementById('copy-status');
+      if (!btn) return;
+
+      function announce(text) {
+        label.textContent = text;
+        status.textContent = text;
+        setTimeout(function () { label.textContent = btn.dataset.label; }, 2200);
+      }
+
+      function fallbackCopy(text) {
+        var field = document.createElement('textarea');
+        field.value = text;
+        field.setAttribute('readonly', '');
+        field.style.position = 'absolute';
+        field.style.left = '-9999px';
+        document.body.appendChild(field);
+        field.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+        document.body.removeChild(field);
+        return ok;
+      }
+
+      btn.addEventListener('click', function () {
+        var url = window.location.href.split('#')[0];
+        var settled = false;
+
+        // Some browsers leave clipboard.writeText() pending instead of rejecting,
+        // so always resolve the button state one way or another.
+        function finish(copied) {
+          if (settled) return;
+          settled = true;
+          if (copied) announce('Link copied');
+          else announce(fallbackCopy(url) ? 'Link copied' : 'Press Ctrl+C to copy');
+        }
+
+        if (navigator.clipboard && window.isSecureContext) {
+          try {
+            navigator.clipboard.writeText(url).then(
+              function () { finish(true); },
+              function () { finish(false); }
+            );
+          } catch (e) {
+            finish(false);
+          }
+          setTimeout(function () { finish(false); }, 1000);
+        } else {
+          finish(false);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
