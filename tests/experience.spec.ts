@@ -88,6 +88,9 @@ test("initiative priorities, district award graph, and funding story are interac
   await page.getByRole("button", { name: /North Orange County.*\$150,000/ }).click();
   await expect(page.locator("#district-award-detail")).toContainText("North Orange County CCD");
   await expect(page.locator("#district-award-detail")).toContainText("$150,000");
+  await expect(page.locator("#district-award-detail")).toContainText("Project");
+  await expect(page.locator("#district-award-detail")).toContainText("Intended impact");
+  await expect(page.locator("#district-award-detail")).toContainText("student perspective");
   await page.getByRole("button", { name: "Belonging", exact: true }).click();
   await expect(page.locator("#priority-description")).toContainText(
     "connected, valued",

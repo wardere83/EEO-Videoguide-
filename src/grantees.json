@@ -7,6 +7,7 @@
     "city": "Santa Maria",
     "focus": "Hiring & mentorship",
     "description": "Strengthening equitable hiring and faculty mentorship.",
+    "impact": "Supports more equitable hiring decisions and stronger faculty development pathways.",
     "start": 18
   },
   {
@@ -17,6 +18,7 @@
     "city": "Lancaster",
     "focus": "LIFT mentorship",
     "description": "Connecting employees through the LIFT Mentor Match program.",
+    "impact": "Builds connections that can strengthen retention, knowledge sharing, and advancement.",
     "start": 24
   },
   {
@@ -27,6 +29,7 @@
     "city": "Glendora",
     "focus": "LIFT mentorship",
     "description": "Expanding access to mentorship and professional development.",
+    "impact": "Creates broader access to relationships and learning that support employee growth.",
     "start": 30
   },
   {
@@ -37,6 +40,7 @@
     "city": "Bakersfield",
     "focus": "Faculty development",
     "description": "Combining virtual reality faculty development with peer mentoring.",
+    "impact": "Expands immersive professional learning while pairing technology with human mentorship.",
     "start": 36
   },
   {
@@ -47,6 +51,7 @@
     "city": "Walnut",
     "focus": "Belonging & mentorship",
     "description": "Advancing belonging through mentorship and restorative practices.",
+    "impact": "Supports a workplace culture where employees can build trust, connection, and belonging.",
     "start": 42
   },
   {
@@ -57,6 +62,7 @@
     "city": "Anaheim",
     "focus": "Inclusive hiring",
     "description": "Strengthening inclusive hiring through training, student voice, and data.",
+    "impact": "Brings training, student perspective, and evidence into more inclusive hiring decisions.",
     "start": 48
   },
   {
@@ -67,6 +73,7 @@
     "city": "Oakland",
     "focus": "LIFT mentorship",
     "description": "Connecting classified professionals with mentorship and leadership opportunities.",
+    "impact": "Creates clearer mentorship and leadership pathways for classified professionals.",
     "start": 54
   },
   {
@@ -77,6 +84,7 @@
     "city": "San Diego",
     "focus": "Equitable recruitment",
     "description": "Advancing transparent and equitable recruitment through TRACE.",
+    "impact": "Supports transparent recruitment practices and a more equitable candidate experience.",
     "start": 60
   },
   {
@@ -87,6 +95,7 @@
     "city": "Santa Monica",
     "focus": "Workforce belonging",
     "description": "Fostering belonging through professional development, mentorship, and employee resource groups.",
+    "impact": "Connects learning, mentorship, and employee communities to strengthen belonging.",
     "start": 66
   },
   {
@@ -97,6 +106,7 @@
     "city": "Fresno",
     "focus": "Faculty pathways",
     "description": "Preparing prospective faculty through mentored Faculty in Training internships.",
+    "impact": "Builds a mentored pathway for prospective faculty and broadens access to teaching careers.",
     "start": 72
   },
   {
@@ -107,6 +117,7 @@
     "city": "Saratoga",
     "focus": "LIFT mentorship",
     "description": "Expanding equitable professional development through LIFT mentorship.",
+    "impact": "Expands access to professional growth through structured, relationship-based mentorship.",
     "start": 78
   }
 ]
