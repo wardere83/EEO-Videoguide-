@@ -1168,43 +1168,27 @@ footer {
 .network-node {
   display: grid;
   place-content: center;
-  width: 84px;
-  height: 84px;
+  width: 132px;
+  height: 76px;
   min-height: 0;
   padding: 8px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 25%, #0a4f91, #001a3d 72%);
+  border-radius: 15px;
+  background: #fffffffa;
   box-shadow: 0 0 0 7px #0074c70d, 0 8px 24px #000b1c66;
   text-align: center;
   animation: node-glow 3.8s ease-in-out infinite alternate;
   animation-delay: var(--delay);
 }
 @keyframes node-glow { to { box-shadow: 0 0 0 9px #0074c714, 0 8px 34px #0079c93d; } }
-.network-node span { font-size: 11px; letter-spacing: .08em; }
-.network-node strong { margin-top: 3px; font-size: 11px; }
-.network-node::after {
-  content: attr(data-name);
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 50%;
-  width: 150px;
-  transform: translateX(-50%);
-  color: #d4e6f5;
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 1.1;
-  text-align: center;
-  text-shadow: 0 2px 8px #000b1c;
-}
+.network-node img { width: 106px; height: 38px; object-fit: contain; }
+.network-node strong { margin-top: 3px; color: #003b78; font-size: 10px; }
 .network-node:hover,
 .network-node[aria-pressed="true"] {
   border-color: #ffca52;
-  background: radial-gradient(circle at 35% 25%, #0d6bc2, #002552 72%);
+  background: white;
   box-shadow: 0 0 0 8px #ffb60016, 0 0 38px #ffb60038;
   transform: translate(-50%, -50%) scale(1.1);
 }
-.network-node[aria-pressed="true"]::after { color: #ffce52; }
 .network-detail {
   grid-template-columns: .85fr 1fr 1.2fr;
   align-items: stretch;
@@ -1223,7 +1207,7 @@ footer {
   .network-node {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 8px;
     width: auto;
     height: auto;
@@ -1232,8 +1216,7 @@ footer {
     animation: none;
     text-align: left;
   }
-  .network-node::after { content: attr(data-name); position: static; order: -1; width: auto; transform: none; flex: 1; text-align: left; }
-  .network-node span { display: none; }
+  .network-node img { width: 96px; height: 34px; }
   .network-node strong { margin: 0; }
   .network-node:hover,
   .network-node[aria-pressed="true"] { transform: none; }

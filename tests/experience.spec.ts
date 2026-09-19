@@ -84,6 +84,12 @@ test("initiative priorities, district award graph, and funding story are interac
     page.getByRole("link", { name: "Grantees", exact: true }),
   ).toHaveCount(0);
   await expect(page.locator(".network-node")).toHaveCount(11);
+  await expect(page.locator(".network-node img")).toHaveCount(11);
+  expect(
+    await page.locator(".network-node img").evaluateAll((images) =>
+      images.every((image) => (image as HTMLImageElement).naturalWidth > 0),
+    ),
+  ).toBe(true);
   await expect(page.getByRole("button", { name: /Allan Hancock.*\$100,000/ })).toBeVisible();
   await page.getByRole("button", { name: /North Orange County.*\$150,000/ }).click();
   await expect(page.locator("#district-award-detail")).toContainText("North Orange County CCD");

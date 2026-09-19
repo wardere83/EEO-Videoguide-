@@ -4,6 +4,8 @@ Grantee list and project summaries were verified against `wardere83/eeo-data-int
 
 The site’s list describes this initiative cohort, not every recipient across all CCCCO EEO funding rounds. Program overview: https://www.cccco.edu/About-Us/Chancellors-Office/Divisions/Institutional-Effectiveness/Grant-Opportunities/Equal-Employment-Opportunities-Innovative-Best-Practices-Grants/
 
+District marks displayed in the interactive award network are unmodified assets retrieved from the corresponding official district or college websites: hancockcollege.edu, avc.edu, citruscollege.edu, kccd.edu, mtsac.edu, nocccd.edu, peralta.edu, sdccd.edu, smc.edu, scccd.edu, and wvm.edu.
+
 Funding figures shown in the interactive story are grounded in the Chancellor’s Office’s published record:
 
 - 2021 foundation and approximately $15.5 million apportionment: https://www.cccco.edu/-/media/CCCCO-Website/docs/memo/finalmemorandumeeoibprfareleasememo1252022a11y.pdf
