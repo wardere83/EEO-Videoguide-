@@ -737,8 +737,6 @@ footer {
 .film .section-heading { width: min(100%, 1220px); margin-inline: auto; }
 .film .section-heading h2 { font-size: clamp(30px, 3vw, 42px); margin-top: 8px; }
 .cinema {
-  --film-scale: 1.012;
-  --film-shift: 0px;
   left: 50%;
   width: min(1600px, calc(100vw - 24px));
   margin-inline: 0;
@@ -772,9 +770,7 @@ footer {
   z-index: 3;
 }
 .cinema video {
-  transform: translateY(var(--film-shift)) scale(var(--film-scale));
-  transition: transform 180ms linear, filter 700ms ease;
-  will-change: transform;
+  transition: filter 700ms ease;
 }
 .cinema:hover video {
   filter: saturate(1.045) contrast(1.02);

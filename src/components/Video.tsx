@@ -52,25 +52,8 @@ export function Video({ showChapters = false }: { showChapters?: boolean }) {
     );
     observer.observe(frame);
 
-    let animationFrame = 0;
-    const updateDepth = () => {
-      animationFrame = 0;
-      const rect = frame.getBoundingClientRect();
-      const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)));
-      frame.style.setProperty("--film-depth", progress.toFixed(3));
-      frame.style.setProperty("--film-scale", (1.012 + progress * 0.024).toFixed(4));
-      frame.style.setProperty("--film-shift", `${((progress - 0.5) * -18).toFixed(2)}px`);
-    };
-    const onScroll = () => {
-      if (!animationFrame) animationFrame = window.requestAnimationFrame(updateDepth);
-    };
-    updateDepth();
-    window.addEventListener("scroll", onScroll, { passive: true });
-
     return () => {
       observer.disconnect();
-      window.removeEventListener("scroll", onScroll);
-      if (animationFrame) window.cancelAnimationFrame(animationFrame);
     };
   }, []);
 
