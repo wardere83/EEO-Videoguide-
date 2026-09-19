@@ -737,13 +737,13 @@ footer {
 /* Academic initiative story */
 .film { padding-top: 30px; }
 .film .section-heading { align-items: flex-end; margin-bottom: 22px; }
-.film .section-heading { width: min(100%, 920px); margin-inline: auto; }
+.film .section-heading { width: 100%; margin-inline: auto; }
 .film .section-heading h2 { font-size: clamp(30px, 3vw, 42px); margin-top: 8px; }
 .initiative-video {
   left: auto;
-  width: min(100%, 920px);
+  width: 100%;
   margin-inline: auto;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 12 / 5;
   border-radius: clamp(22px, 2.2vw, 34px);
   box-shadow: 0 18px 52px rgba(0, 47, 109, .16);
   isolation: isolate;
@@ -793,7 +793,7 @@ footer {
 .initiative-video-controls input { width: 100%; accent-color: var(--gold); }
 .initiative-video-controls span { font-size: 12px; font-variant-numeric: tabular-nums; text-align: center; }
 .story-chapters {
-  width: min(100%, 920px);
+  width: 100%;
   margin-inline: auto;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
