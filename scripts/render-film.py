@@ -40,15 +40,6 @@ def text(draw, xy, value, font, color, opacity=1, anchor=None):
     draw.text(xy, value, font=font, fill=alpha(color, opacity), anchor=anchor)
 
 
-def curve(control, steps=80):
-    p0, p1, p2, p3 = control; points = []
-    for i in range(steps+1):
-        t, u = i/steps, 1-i/steps
-        points.append((p0[0]*u**3+3*p1[0]*u*u*t+3*p2[0]*u*t*t+p3[0]*t**3,
-                       p0[1]*u**3+3*p1[1]*u*u*t+3*p2[1]*u*t*t+p3[1]*t**3))
-    return points
-
-
 def make_base():
     image = Image.new("RGBA", (W, H), INK+(255,)); draw = ImageDraw.Draw(image)
     for y in range(H):
@@ -58,31 +49,24 @@ def make_base():
 
 
 BASE = make_base()
-PATHS = [
-    curve([(830, 650), (1110, 190), (1510, 760), (2040, 180)]),
-    curve([(760, 190), (1120, 690), (1540, -60), (2070, 540)]),
-    curve([(900, 430), (1260, 90), (1600, 690), (2020, 350)]),
-]
 
 
 def background(global_t):
     image = BASE.copy(); draw = ImageDraw.Draw(image, "RGBA")
-    for j, points in enumerate(PATHS):
-        draw.line(points, fill=alpha(LIGHT if j != 1 else BLUE, .12), width=2)
-        for i in range(4):
-            phase = (global_t*(.035+j*.006)+i*.25+j*.11) % 1
-            x, y = points[int(phase*(len(points)-1))]; radius = 5 if i == 0 else 3
-            draw.ellipse((x-radius, y-radius, x+radius, y+radius), fill=alpha(LIGHT, .44))
-    for i in range(18):
-        x = (i*241+global_t*(4+i%3)) % (W+120)-60
-        y = 78+(i*113)%650+math.sin(global_t*.18+i)*18
-        draw.ellipse((x-2, y-2, x+2, y+2), fill=alpha(MIST, .18))
+    # Keep ambient motion inside the visual field so copy always has a quiet canvas.
+    for row in range(9):
+        for col in range(12):
+            x = 1010 + col * 70
+            y = 118 + row * 70
+            pulse = .5 + .5 * math.sin(global_t * .55 + row * .7 + col * .42)
+            radius = 1.4 + pulse * .8
+            draw.ellipse((x-radius, y-radius, x+radius, y+radius), fill=alpha(MIST, .035 + pulse * .025))
     text(draw, (82, 58), "EQUAL EMPLOYMENT OPPORTUNITY", regular(15), MIST, .8)
     text(draw, (1838, 58), "FUNDING · PRACTICE · IMPACT", bold(12), MIST, .48, "ra")
     return image
 
 
-def chapter(draw, kicker, title, detail, local, width=760, size=76):
+def chapter(draw, kicker, title, detail, local, width=780, size=76):
     p = reveal(local); offset = int((1-p)*18)
     text(draw, (82, 190+offset), kicker.upper(), bold(16), LIGHT, p)
     y, face = 244+offset, regular(size)
@@ -91,15 +75,26 @@ def chapter(draw, kicker, title, detail, local, width=760, size=76):
         text(draw, (82, y), line, face, LIGHT if index == len(lines)-1 else WHITE, p)
         y += int(size*.98)
     y += 34
-    for line in wrap(draw, detail, regular(22), width):
-        text(draw, (82, y), line, regular(22), MIST, p*.92); y += 31
+    for line in wrap(draw, detail, regular(26), width):
+        text(draw, (82, y), line, regular(26), MIST, p*.94); y += 38
 
 
-def metric(draw, amount, kicker, detail, local):
+def metric(draw, amount, kicker, detail, local, description=""):
     p = reveal(local); offset = int((1-p)*16)
     text(draw, (82, 214+offset), kicker.upper(), bold(16), LIGHT, p)
     text(draw, (82, 274+offset), amount, regular(126), WHITE, p)
-    text(draw, (82, 430+offset), detail, regular(27), LIGHT, p)
+    text(draw, (82, 430+offset), detail, regular(30), LIGHT, p)
+    y = 500 + offset
+    for line in wrap(draw, description, regular(23), 760):
+        text(draw, (82, y), line, regular(23), MIST, p*.92); y += 34
+
+
+def panel(draw, box, opacity=1):
+    draw.rounded_rectangle(box, radius=28, fill=alpha(DEEP, opacity*.9), outline=alpha(MIST, opacity*.16), width=2)
+
+
+def caption(draw, xy, value, opacity=1, anchor=None):
+    text(draw, xy, value.upper(), bold(14), MIST, opacity, anchor)
 
 
 def ring(draw, center, radius, start, end, color, opacity, width=4):
@@ -139,126 +134,148 @@ def finish(image, local, duration):
 
 def opener(t, duration, gt, _):
     image = background(gt); draw = ImageDraw.Draw(image, "RGBA")
-    chapter(draw, "A statewide system for progress", "Ideas become infrastructure.",
-            "Investment · practice · evidence · lasting opportunity", t, 780, 82)
-    p, center = reveal(t, .45, 1.25), (1460, 400)
-    dot_sphere(draw, center, 260, gt, p)
-    for index in range(5):
-        angle = -1.8+index*.82+gt*.045
-        x, y = center[0]+math.cos(angle)*330, center[1]+math.sin(angle)*210
-        draw.ellipse((x-5,y-5,x+5,y+5), fill=alpha(LIGHT,p*(.5+index*.08)))
+    chapter(draw, "CCCCO · EEO INNOVATIVE BEST PRACTICES", "District ideas become statewide progress.",
+            "The EEO IBP Grant Initiative funds district-led approaches that advance equitable hiring, retention, and institutional practice.", t, 790, 72)
+    p = reveal(t, .45, 1.2)
+    panel(draw, (1040, 142, 1818, 674), p)
+    caption(draw, (1092, 188), "How the initiative works", p)
+    steps = [("01", "INVEST", "Fund district innovation"), ("02", "IMPLEMENT", "Put new practices to work"),
+             ("03", "LEARN", "Measure and share results"), ("04", "SUSTAIN", "Build systemwide capacity")]
+    for i, (number, label, detail) in enumerate(steps):
+        q = ease((p-i*.07)/.75); y = 256+i*92
+        draw.rounded_rectangle((1090,y-31,1152,y+31), radius=17, fill=alpha(BLUE,q))
+        text(draw,(1121,y),number,bold(14),WHITE,q,"mm")
+        text(draw,(1190,y-18),label,bold(18),WHITE,q)
+        text(draw,(1190,y+12),detail,regular(18),MIST,q)
+        draw.rounded_rectangle((1655,y-4,1748,y+4),radius=4,fill=alpha(LIGHT,q*.18))
+        draw.rounded_rectangle((1655,y-4,1655+93*min(1,(gt*.18+i*.2)%1),y+4),radius=4,fill=alpha(LIGHT,q))
     return finish(image, t, duration)
 
 
 def foundation(t, duration, gt, _):
     image = background(gt); draw = ImageDraw.Draw(image, "RGBA")
-    metric(draw, "$20M", "Statewide foundation · 2021", "$15.5M apportioned systemwide", t)
+    metric(draw, "$20M", "Statewide foundation · 2021", "$15.5M apportioned systemwide", t,
+           "AB 132 established a one-time EEO Best Practices Fund. Eligible districts received the statewide foundation in 2021–22.")
     p, center = reveal(t, .35, 1.25), (1460, 395)
+    panel(draw, (1040, 122, 1818, 684), p)
     ring(draw, center, 248, -90, -90+360*.775*p, LIGHT, p, 18)
-    ring(draw, center, 284, 16+gt*4, 235+gt*4, BLUE, p*.38, 3)
-    ring(draw, center, 318, 198-gt*3, 410-gt*3, MIST, p*.18, 2)
+    ring(draw, center, 248, -90+360*.775*p, 270, BLUE, p*.48, 18)
     text(draw, (center[0], center[1]-22), "$15.5M", regular(76), WHITE, p, "mm")
-    text(draw, (center[0], center[1]+52), "APPORTIONED TO ELIGIBLE DISTRICTS", bold(14), MIST, p, "mm")
-    text(draw, (center[0], 715), "77.5% OF THE STATEWIDE FOUNDATION", bold(13), LIGHT, p, "mm")
+    text(draw, (center[0], center[1]+52), "TO ELIGIBLE DISTRICTS", bold(15), MIST, p, "mm")
+    caption(draw, (1460, 638), "77.5% of the statewide fund", p, "mm")
     return finish(image, t, duration)
 
 
 def first_cycle(t, duration, gt, _):
     image = background(gt); draw = ImageDraw.Draw(image, "RGBA")
-    metric(draw, "$5.65M", "First competitive cycle · 2023–25", "21 district award selections", t)
-    p, center = reveal(t, .35, 1.1), (1460, 400)
+    metric(draw, "$5.65M", "First competitive cycle · 2023–25", "21 district award selections", t,
+           "Competitive grants expanded local experimentation and created practices that other colleges can study and adapt.")
+    p = reveal(t, .35, 1.1)
+    panel(draw, (1040, 142, 1818, 674), p)
+    caption(draw, (1092, 190), "Twenty-one funded district projects", p)
     for i in range(21):
-        a = -math.pi/2+i*2*math.pi/21+math.sin(gt*.18)*.06; radius = 150+(i%3)*62
-        x, y = center[0]+math.cos(a)*radius, center[1]+math.sin(a)*radius
-        q = ease((p-i*.018)/.72); draw.line((*center, x, y), fill=alpha(LIGHT, q*.17), width=2)
-        size = 11 if i%3 == 0 else 8
-        draw.ellipse((x-size, y-size, x+size, y+size), fill=alpha(WHITE if i%4 == 0 else LIGHT, q))
-    ring(draw, center, 102, -90+gt*7, 226+gt*7, BLUE, p*.72, 5)
-    text(draw, center, "21", regular(72), WHITE, p, "mm")
-    text(draw, (center[0], center[1]+60), "DISTRICTS", bold(13), MIST, p, "mm")
+        row, col = divmod(i, 7); x, y = 1120+col*96, 286+row*106
+        q = ease((p-i*.022)/.72); radius = 25+2*math.sin(gt*1.2+i)
+        draw.ellipse((x-radius,y-radius,x+radius,y+radius),fill=alpha(LIGHT if i%4 else WHITE,q))
+        text(draw,(x,y),f"{i+1:02d}",bold(12),DEEP,q,"mm")
+    draw.rounded_rectangle((1092,579,1758,591),radius=6,fill=alpha(MIST,p*.14))
+    draw.rounded_rectangle((1092,579,1092+666*p,591),radius=6,fill=alpha(LIGHT,p))
+    text(draw,(1092,624),"LOCAL INNOVATION",bold(13),MIST,p)
+    text(draw,(1758,624),"SHARED PRACTICE",bold(13),MIST,p,"ra")
     return finish(image, t, duration)
 
 
 def current_cycle(t, duration, gt, _):
     image = background(gt); draw = ImageDraw.Draw(image, "RGBA")
-    metric(draw, "$1.4M", "Current cycle · 2026–28", "11 district awards", t)
-    p, awards, baseline = reveal(t, .35, 1.05), [100,100,100,150,150,150,100,150,150,150,100], 590
-    for i, amount in enumerate(awards):
-        x, q = 1080+i*71, ease((p-i*.028)/.72); height = (205 if amount == 100 else 305)*q
-        draw.line((x, baseline, x, baseline-height), fill=alpha(BLUE if amount == 100 else LIGHT, q), width=7)
-        glow = 12+3*math.sin(gt*2+i)
-        draw.ellipse((x-glow, baseline-height-glow, x+glow, baseline-height+glow), fill=alpha(WHITE if i in (1,6,10) else LIGHT, q*.94))
-        text(draw, (x, baseline+34), f"{i+1:02d}", bold(12), MIST, q, "mm")
-        text(draw, (x, baseline-height-35), f"${amount}K", bold(11), WHITE, q, "mm")
-    text(draw, (1460, 700), "FIVE $100K AWARDS  ·  SIX $150K AWARDS", bold(13), MIST, p, "mm")
+    metric(draw, "$1.4M", "Current cycle · 2026–28", "11 district awards", t,
+           "Awards support innovative pre-hiring, post-hiring, and EEO interventions with two levels of district investment.")
+    p = reveal(t, .35, 1.05)
+    panel(draw, (1040, 142, 1818, 674), p)
+    caption(draw,(1092,190),"Award portfolio",p)
+    groups=[("AWARD LEVEL","5 AWARDS × $100K","$500K",5,BLUE),("AWARD LEVEL","6 AWARDS × $150K","$900K",6,LIGHT)]
+    for row,(name,formula,total,count,color) in enumerate(groups):
+        y=292+row*190; q=ease((p-row*.12)/.82)
+        text(draw,(1092,y-34),name,bold(18),WHITE,q)
+        text(draw,(1092,y),formula,regular(20),MIST,q)
+        text(draw,(1748,y-15),total,regular(42),WHITE,q,"ra")
+        for i in range(count):
+            x=1105+i*83
+            draw.rounded_rectangle((x,y+54,x+57,y+82),radius=14,fill=alpha(color,q*(.78+i*.035)))
+        draw.rounded_rectangle((1608,y+54,1748,y+82),radius=14,fill=alpha(color,q*.16))
+        draw.rounded_rectangle((1608,y+54,1608+140*q,y+82),radius=14,fill=alpha(color,q))
     return finish(image, t, duration)
 
 
 def combined(t, duration, gt, _):
     image = background(gt); draw = ImageDraw.Draw(image, "RGBA")
-    metric(draw, "$7.05M", "Competitive awards since launch", "32 award selections · two cycles", t)
-    p, target = reveal(t, .35, 1.1), (1605, 400)
-    flows = [((1010,235),(1220,200),(1390,350),target,"$5.65M","2023–25"),
-             ((1010,570),(1210,610),(1400,450),target,"$1.4M","2026–28")]
-    for i, (*control, amount, year) in enumerate(flows):
-        points = curve(control); draw.line(points[:max(2, int(len(points)*p))], fill=alpha(LIGHT if i else BLUE, p*.8), width=8 if i else 14)
-        text(draw, (control[0][0], control[0][1]-34), amount, regular(43), WHITE, p)
-        text(draw, (control[0][0], control[0][1]+28), year, bold(13), MIST, p)
-        for dot in range(5):
-            x, y = points[int(((gt*.16+dot*.2+i*.08)%1)*(len(points)-1))]
-            draw.ellipse((x-5,y-5,x+5,y+5), fill=alpha(LIGHT,p))
-    draw.ellipse((1499,294,1711,506), fill=alpha(DEEP,p), outline=alpha(LIGHT,p), width=4)
-    text(draw, (1605,385), "32", regular(64), WHITE, p, "mm")
-    text(draw, (1605,443), "AWARD SELECTIONS", bold(12), MIST, p, "mm")
+    metric(draw, "$7.05M", "Competitive awards since launch", "32 award selections · two cycles", t,
+           "This total separates competitive awards from the earlier statewide apportionment, preventing double counting.")
+    p = reveal(t, .35, 1.1)
+    panel(draw,(1040,142,1818,674),p)
+    caption(draw,(1092,190),"Competitive funding history",p)
+    bars=[("2023–25","$5.65M",.801,BLUE,"21 selections"),("2026–28","$1.4M",.199,LIGHT,"11 selections")]
+    for row,(year,amount,share,color,selections) in enumerate(bars):
+        y=290+row*160; q=ease((p-row*.1)/.8)
+        text(draw,(1092,y-34),year,bold(16),MIST,q)
+        text(draw,(1748,y-34),f"{amount} · {selections}",bold(16),WHITE,q,"ra")
+        draw.rounded_rectangle((1092,y,1748,y+54),radius=18,fill=alpha(MIST,q*.12))
+        draw.rounded_rectangle((1092,y,1092+656*share*q,y+54),radius=18,fill=alpha(color,q))
+    draw.line((1092,574,1748,574),fill=alpha(MIST,p*.18),width=2)
+    text(draw,(1092,620),"TOTAL",bold(14),MIST,p)
+    text(draw,(1748,620),"$7,051,806",regular(34),WHITE,p,"ra")
     return finish(image, t, duration)
 
 
 def districts(t, duration, gt, _):
     image = background(gt); draw = ImageDraw.Draw(image, "RGBA")
-    chapter(draw, "Eleven local signals", "Local projects. Shared learning.",
-            "Seven Tier 1 districts · Four Tier 2 LIFT districts", t, 700, 70)
-    p, center, tier2 = reveal(t,.35,1.1), (1480,400), {1,2,3,10}; positions=[]
-    for i in range(11):
-        a=-math.pi/2+i*2*math.pi/11; radius=270 if i%2 else 230
-        positions.append((center[0]+math.cos(a)*radius, center[1]+math.sin(a)*radius))
-    ordered=sorted(tier2)
-    for i,(x,y) in enumerate(positions):
-        q=ease((p-i*.025)/.75); draw.line((*center,x,y), fill=alpha(LIGHT,q*.25), width=2)
-        if i in tier2:
-            nx,ny=positions[ordered[(ordered.index(i)+1)%4]]; draw.line((x,y,nx,ny), fill=alpha(WHITE,q*.28), width=2)
-        size=21 if i in tier2 else 15
-        draw.ellipse((x-size,y-size,x+size,y+size), fill=alpha(WHITE if i in tier2 else LIGHT,q))
-        text(draw,(x,y),str(i+1),bold(11),DEEP,q,"mm")
-    draw.ellipse((1391,311,1569,489), fill=alpha(DEEP,p), outline=alpha(LIGHT,p), width=4)
-    text(draw,(1480,385),"$1.4M",regular(52),WHITE,p,"mm"); text(draw,(1480,436),"11 DISTRICTS",bold(12),MIST,p,"mm")
+    chapter(draw, "Current district portfolio", "Local projects. Shared learning.",
+            "Eleven districts are testing EEO interventions while building knowledge the broader system can use.", t, 780, 68)
+    p = reveal(t,.35,1.1)
+    panel(draw,(1040,142,1818,674),p)
+    caption(draw,(1092,190),"2026–28 award structure",p)
+    tiers=[("TIER 1","7 DISTRICTS","Focused district implementation",7,BLUE),
+           ("TIER 2 LIFT","4 DISTRICTS","Deeper collaboration and learning",4,LIGHT)]
+    for row,(name,count,detail,total,color) in enumerate(tiers):
+        y=292+row*184; q=ease((p-row*.1)/.8)
+        text(draw,(1092,y-35),name,bold(18),WHITE,q)
+        text(draw,(1748,y-35),count,bold(16),LIGHT,q,"ra")
+        text(draw,(1092,y),detail,regular(20),MIST,q)
+        for i in range(total):
+            x=1106+i*86
+            pulse=.86+.14*math.sin(gt*1.3+i*.7)
+            draw.ellipse((x-18,y+54-18,x+18,y+54+18),fill=alpha(color,q*pulse))
+            text(draw,(x,y+54),f"{i+1:02d}",bold(10),DEEP,q,"mm")
+    text(draw,(1429,628),"$1.4M IN MOTION",bold(15),MIST,p,"mm")
     return finish(image,t,duration)
 
 
 def sustainable(t, duration, gt, _):
     image=background(gt); draw=ImageDraw.Draw(image,"RGBA")
     chapter(draw,"Sustainable impact model","Investment that compounds.",
-            "Projects become tested practices. Practices build shared capacity.",t,720,70)
-    p,center=reveal(t,.35,1),(1480,400); labels=[("INVEST",-90),("IMPLEMENT",0),("LEARN",90),("SUSTAIN",180)]
-    ring(draw,center,260,-90,-90+360*p,LIGHT,p*.45,4)
-    for i,(label,degrees) in enumerate(labels):
-        a=math.radians(degrees); x,y=center[0]+math.cos(a)*260,center[1]+math.sin(a)*260; q=ease((p-i*.06)/.76)
-        draw.ellipse((x-61,y-61,x+61,y+61),fill=alpha(DEEP,q),outline=alpha(WHITE if label=="SUSTAIN" else LIGHT,q),width=4 if label=="SUSTAIN" else 3)
-        text(draw,(x,y),label,bold(14),WHITE,q,"mm")
-    for i in range(4):
-        a=-math.pi/2+((gt*.11+i*.25)%1)*2*math.pi; x,y=center[0]+math.cos(a)*260,center[1]+math.sin(a)*260
-        draw.ellipse((x-7,y-7,x+7,y+7),fill=alpha(LIGHT,p))
+            "Projects become tested practices. Evidence builds shared capacity. Capacity sustains systemwide EEO progress.",t,780,68)
+    p=reveal(t,.35,1)
+    panel(draw,(1040,142,1818,674),p)
+    caption(draw,(1092,190),"From award to lasting practice",p)
+    stages=[("01","INVEST","Resource the idea"),("02","IMPLEMENT","Test in practice"),("03","LEARN","Document evidence"),("04","SUSTAIN","Share what works")]
+    for i,(number,label,detail) in enumerate(stages):
+        q=ease((p-i*.08)/.76); y=272+i*91
+        draw.rounded_rectangle((1092,y-30,1152,y+30),radius=16,fill=alpha(LIGHT if i==3 else BLUE,q))
+        text(draw,(1122,y),number,bold(13),WHITE,q,"mm")
+        text(draw,(1190,y-17),label,bold(18),WHITE,q)
+        text(draw,(1190,y+13),detail,regular(18),MIST,q)
+        if i<3:
+            draw.rounded_rectangle((1660,y-3,1748,y+3),radius=3,fill=alpha(LIGHT,q*.2))
+            draw.rounded_rectangle((1660,y-3,1660+88*((gt*.22+i*.21)%1),y+3),radius=3,fill=alpha(LIGHT,q))
     return finish(image,t,duration)
 
 
 def finale(t, duration, gt, _):
-    image=background(gt); draw=ImageDraw.Draw(image,"RGBA"); opacity=fade(t,duration); p=ease(t/2)
-    starts=[(-240,300),(960,-180),(2180,500)]; finals=[760,960,1160]
-    for i,letter in enumerate("IBP"):
-        q=ease((p-i*.08)/.84); x=starts[i][0]+(finals[i]-starts[i][0])*q; y=starts[i][1]+(335-starts[i][1])*q
-        text(draw,(x,y),letter,regular(178),WHITE if i == 0 else LIGHT,opacity*q,"mm")
-    line=ease((t-1.35)/1); draw.rounded_rectangle((655,475,655+610*line,479),radius=2,fill=alpha(LIGHT,opacity*.72))
-    text(draw,(960,540),"GRANT INITIATIVE",regular(29),WHITE,opacity*ease((t-1.7)/.9),"mm")
-    text(draw,(960,598),"IDEAS · PRACTICE · EVIDENCE · SUSTAINABLE IMPACT",bold(13),MIST,opacity*ease((t-2.4)/.9),"mm")
+    image=background(gt); draw=ImageDraw.Draw(image,"RGBA"); opacity=fade(t,duration); p=ease(t/1.7)
+    text(draw,(960,272),"EEO",bold(18),LIGHT,opacity*p,"mm")
+    text(draw,(960,380),"IBP Grant Initiative",regular(92),WHITE,opacity*p,"mm")
+    line=ease((t-1.05)/.85); draw.rounded_rectangle((575,468,575+770*line,474),radius=3,fill=alpha(LIGHT,opacity*.82))
+    text(draw,(960,538),"DISTRICT INNOVATION · SHARED EVIDENCE · SUSTAINABLE IMPACT",bold(15),MIST,opacity*ease((t-1.45)/.85),"mm")
+    text(draw,(960,604),"$7.05M IN COMPETITIVE AWARDS · 32 AWARD SELECTIONS",regular(20),LIGHT,opacity*ease((t-2)/.85),"mm")
     return finish(image,t,duration)
 
 
