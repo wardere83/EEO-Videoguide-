@@ -12,13 +12,14 @@ const chapters = [
   { label: "Current cycle", time: 32 },
   { label: "Combined impact", time: 44 },
   { label: "Districts", time: 54 },
+  { label: "Sustainable impact", time: 70 },
 ];
 
 export function Video({ showChapters = false }: { showChapters?: boolean }) {
   const video = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(true);
   const [time, setTime] = useState(0);
-  const [duration, setDuration] = useState(78);
+  const [duration, setDuration] = useState(88);
   const [selected, setSelected] = useState(0);
 
   useEffect(() => {

@@ -22,7 +22,7 @@ export function Layout() {
           >
             <img
               className="logo"
-              src="./brand/cccco-logo.svg"
+              src="./brand/cccco-logo-stacked.svg"
               alt="California Community Colleges"
             />
           </Link>
@@ -58,7 +58,7 @@ export function Layout() {
         <div className="footer-top">
           <img
             className="logo"
-            src="./brand/cccco-logo.svg"
+            src="./brand/cccco-logo-stacked.svg"
             alt="California Community Colleges"
           />
           <div>

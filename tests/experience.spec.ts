@@ -20,12 +20,12 @@ test("public routes, resource filtering, video, and portal destination", async (
     .getByRole("navigation", { name: "Main navigation" })
     .getByRole("link", { name: "Resources", exact: true })
     .click();
-  await page.getByLabel("Search resources").fill("NOVA");
+  await page.getByLabel("Search resources").fill("dashboard");
   await expect(page.locator(".resource-grid article")).toHaveCount(1);
   await page.getByLabel("Search resources").fill("no match possible");
   await expect(page.getByText("No matching resources.")).toBeVisible();
   await page.getByRole("button", { name: "Clear filters" }).click();
-  await expect(page.locator(".resource-grid article")).toHaveCount(5);
+  await expect(page.locator(".resource-grid article")).toHaveCount(4);
   await page.getByRole("button", { name: "Training", exact: true }).click();
   await page.getByRole("link", { name: "View the overview" }).click();
   await expect(page.locator('video source[type="video/mp4"]')).toHaveAttribute(
@@ -102,7 +102,7 @@ test("initiative priorities, district award graph, and funding story are interac
       .getByRole("link", { name: "Film", exact: true }),
   ).toHaveCount(0);
   await page.goto("/#/video");
-  await expect(page.locator("video")).toHaveJSProperty("duration", 78);
+  await expect(page.locator("video")).toHaveJSProperty("duration", 88);
   await expect(page.locator("video")).toHaveJSProperty("controls", false);
   await page
     .getByRole("button", { name: /05 Combined impact/ })
@@ -116,6 +116,14 @@ test("initiative priorities, district award graph, and funding story are interac
   await page.getByRole("tab", { name: /2026–28 \$1.4M/ }).click();
   await expect(page.getByRole("tabpanel")).toContainText("11 district awards");
   await expect(page.getByRole("tabpanel")).toContainText("$1.4M");
+  await page.goto("/");
+  await expect(page.getByRole("heading", { name: "One connected view of the work." })).toBeVisible();
+  await page.getByRole("button", { name: "District B", exact: true }).click();
+  await expect(page.locator(".app-greeting")).toContainText("District B");
+  await page.getByRole("button", { name: "Show Book an SME" }).click();
+  await expect(page.locator(".demo-scene")).toContainText("Book an SME");
+  await expect(page.locator(".demo-scene")).toContainText("View availability");
+  await page.goto("/#/video");
   await page.getByText("Read transcript", { exact: true }).click();
   await expect(page.locator(".transcript")).toContainText(
     "West Valley-Mission CCD",

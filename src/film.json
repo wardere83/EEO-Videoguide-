@@ -2,8 +2,8 @@
   {
     "duration": 8,
     "label": "EQUAL EMPLOYMENT OPPORTUNITY",
-    "title": "Opportunity, set in motion.",
-    "description": "The EEO Innovative Best Practices Grant Initiative advances bold approaches to recruitment, professional growth, and belonging."
+    "title": "Equity infrastructure, built to last.",
+    "description": "The EEO Innovative Best Practices Grant Initiative turns bold ideas into connected systems for recruitment, professional growth, and belonging."
   },
   {
     "duration": 12,
@@ -37,9 +37,16 @@
     "transcript": "Current awards are Allan Hancock Joint CCD, Antelope Valley CCD, Citrus CCD, Peralta CCD, and West Valley-Mission CCD at $100,000 each; and Kern CCD, Mt. San Antonio CCD, North Orange County CCD, San Diego CCD, Santa Monica CCD, and State Center CCD at $150,000 each."
   },
   {
+    "duration": 10,
+    "label": "SUSTAINABLE IMPACT MODEL",
+    "title": "Investment that compounds.",
+    "description": "Projects become tested practices. Practices build shared capacity. Capacity sustains systemwide progress.",
+    "transcript": "The initiative connects investment, implementation, learning, and shared capacity to support lasting equal employment opportunity impact."
+  },
+  {
     "duration": 8,
     "label": "THE WORK CONTINUES",
-    "title": "Better practices. Broader opportunity.",
-    "description": "California Community Colleges Chancellor’s Office · eeodashboard.io"
+    "title": "Sustainable progress. Broader opportunity.",
+    "description": "Connected through the EEO Dashboard · eeodashboard.io"
   }
 ]

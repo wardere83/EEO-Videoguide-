@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { Video } from "../components/Video";
+import { MobileShowcase } from "../components/MobileShowcase";
 import { links } from "../config";
 
 const priorities = [
@@ -89,6 +90,7 @@ export function Home() {
           </a>
         </div>
       </section>
+      <MobileShowcase />
       <section className="closing width">
         <div>
           <p className="eyebrow">For participating district teams</p>

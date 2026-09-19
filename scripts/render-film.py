@@ -31,8 +31,9 @@ bold = lambda size: ImageFont.truetype(str(FONTS / "font-4.ttf"), size)
 
 scenes = json.loads((ROOT / "src/film.json").read_text())
 districts = json.loads((ROOT / "src/grantees.json").read_text())
-logo = Image.open(ROOT / "public/brand/cccco-logo.png").convert("RGBA")
-logo.thumbnail((330, 48))
+TOTAL_DURATION = sum(scene["duration"] for scene in scenes)
+logo = Image.open(ROOT / "public/brand/cccco-logo-stacked.png").convert("RGBA")
+logo.thumbnail((240, 48))
 
 
 def clamp(value, low=0.0, high=1.0):
@@ -96,24 +97,30 @@ def background(frame_no):
         y = (i * 97 + 80 * math.sin(phase * .17 + i)) % H
         radius = 2 if i % 5 else 3
         od.ellipse((x - radius, y - radius, x + radius, y + radius), fill=alpha(GOLD if i % 6 == 0 else MIST, .38))
+    horizon = 560
+    for i in range(9):
+        gy = horizon + int((i / 9) ** 1.8 * 180)
+        od.line((0, gy, W, gy), fill=alpha(MIST, .06), width=1)
+    for i in range(-8, 9):
+        od.line((W // 2, horizon, W // 2 + i * 145, H), fill=alpha(MIST, .055), width=1)
     return Image.alpha_composite(im.convert("RGBA"), overlay)
 
 
 def brand(draw, im):
     draw.rounded_rectangle((36, 28, 405, 91), radius=32, fill=(255, 255, 255, 242))
-    im.alpha_composite(logo, (57, 36))
+    im.alpha_composite(logo, (36 + (369 - logo.width) // 2, 35))
     draw.text((1220, 47), "EEO IBP", font=bold(15), fill=alpha(WHITE, .76), anchor="ra")
 
 
 def progress_line(draw, elapsed):
     draw.line((48, 680, 1232, 680), fill=alpha(MIST, .22), width=2)
-    draw.line((48, 680, 48 + 1184 * elapsed / 78, 680), fill=GOLD, width=3)
+    draw.line((48, 680, 48 + 1184 * elapsed / TOTAL_DURATION, 680), fill=GOLD, width=3)
 
 
 def heading(draw, kicker, title, description, opacity, offset=0):
     fill = alpha(WHITE, opacity)
     draw.text((62, 160 + offset), kicker.upper(), font=bold(17), fill=alpha(GOLD, opacity))
-    y = text_block(draw, title, 58, 208 + offset, serif(69), fill, 760, .98)
+    y = text_block(draw, title, 58, 208 + offset, serif(62), fill, 700, .98)
     draw.rounded_rectangle((62, y + 24, 148, y + 29), radius=3, fill=alpha(GOLD, opacity))
     text_block(draw, description, 62, y + 57, regular(25), alpha(MIST, opacity), 690, 1.3)
 
@@ -180,6 +187,35 @@ def district_scene(draw, scene, local, duration):
         draw.text((x, y + 12), f'${district["award"] // 1000}K', font=bold(15), fill=alpha(GOLD, opacity * reveal), anchor="mm")
 
 
+def impact_scene(draw, scene, local, duration):
+    opacity = fade_window(local, duration)
+    arrival = ease(local / 1.5)
+    fill = alpha(WHITE, opacity * arrival)
+    draw.text((62, 160), scene["label"], font=bold(17), fill=alpha(GOLD, opacity * arrival))
+    draw.text((58, 208), scene["title"], font=serif(62), fill=fill)
+    draw.rounded_rectangle((62, 288, 148, 293), radius=3, fill=alpha(GOLD, opacity * arrival))
+    text_block(draw, scene["description"], 62, 328, regular(25), alpha(MIST, opacity * arrival), 570, 1.3)
+    nodes = [
+        (760, 360, "INVEST", "Fund ideas"),
+        (1035, 350, "IMPLEMENT", "Test practices"),
+        (1100, 555, "LEARN", "Share evidence"),
+        (835, 565, "SUSTAIN", "Build capacity"),
+    ]
+    for index, (x, y, label, detail) in enumerate(nodes):
+        reveal = ease((local - index * .22) / 1.1)
+        next_x, next_y, _, _ = nodes[(index + 1) % len(nodes)]
+        draw.line((x, y, next_x, next_y), fill=alpha(MIST, opacity * reveal * .36), width=2)
+        travel = (local * .28 + index * .25) % 1
+        px, py = x + (next_x - x) * travel, y + (next_y - y) * travel
+        draw.ellipse((px - 4, py - 4, px + 4, py + 4), fill=alpha(GOLD, opacity * reveal))
+    for index, (x, y, label, detail) in enumerate(nodes):
+        reveal = ease((local - index * .22) / 1.1)
+        radius = 59 if label != "SUSTAIN" else 69
+        draw.ellipse((x - radius, y - radius, x + radius, y + radius), fill=alpha(DEEP, opacity * reveal * .95), outline=alpha(GOLD if label == "SUSTAIN" else MIST, opacity * reveal * .55), width=3 if label == "SUSTAIN" else 2)
+        draw.text((x, y - 9), label, font=bold(13), fill=alpha(GOLD if label == "SUSTAIN" else WHITE, opacity * reveal), anchor="mm")
+        draw.text((x, y + 14), detail, font=regular(11), fill=alpha(MIST, opacity * reveal), anchor="mm")
+
+
 def render_scene(index, local, frame_no):
     scene = scenes[index]
     duration = scene["duration"]
@@ -205,6 +241,8 @@ def render_scene(index, local, frame_no):
         funding_scene(draw, scene, local, duration, "$7.05M", "competitive awards since launch", "32 award selections · two cycles")
     elif index == 5:
         district_scene(draw, scene, local, duration)
+    elif index == 6:
+        impact_scene(draw, scene, local, duration)
     else:
         opacity = fade_window(local, duration)
         arrival = ease(local / 2)

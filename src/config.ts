@@ -3,7 +3,6 @@ export const links = {
   initiative:
     "https://www.cccco.edu/About-Us/Chancellors-Office/Divisions/Institutional-Effectiveness/Grant-Opportunities/Equal-Employment-Opportunities-Innovative-Best-Practices-Grants/",
   brand: "https://www.cccco.edu/About-Us/News-and-Media/Brand/assets/",
-  nova: "https://nova.cccco.edu",
 };
 export const resources = [
   {
@@ -21,14 +20,6 @@ export const resources = [
       "Sign in to your assigned district workspace for projects, files, and grant coordination.",
     href: links.portal,
     label: "Open EEO Dashboard",
-  },
-  {
-    title: "NOVA",
-    category: "Reporting",
-    description:
-      "Access the Chancellor’s Office NOVA system. Follow the reporting requirements applicable to your award.",
-    href: links.nova,
-    label: "Open NOVA",
   },
   {
     title: "Initiative overview",
