@@ -76,17 +76,17 @@ test("desktop and mobile layout and navigation", async ({ page }) => {
   await page.screenshot({ path: "/tmp/eeo-mobile.png", fullPage: true });
 });
 
-test("initiative priorities, district award graph, and funding story are interactive", async ({
+test("initiative priorities, district constellation, and funding story are interactive", async ({
   page,
 }) => {
   await page.goto("/");
   await expect(
     page.getByRole("link", { name: "Grantees", exact: true }),
   ).toHaveCount(0);
-  await expect(page.locator(".award-column")).toHaveCount(11);
-  await expect(page.locator(".award-column img")).toHaveCount(11);
+  await expect(page.locator(".district-logo-rail button")).toHaveCount(11);
+  await expect(page.locator(".district-logo-rail img")).toHaveCount(11);
   expect(
-    await page.locator(".award-column img").evaluateAll((images) =>
+    await page.locator(".district-logo-rail img").evaluateAll((images) =>
       images.every((image) => (image as HTMLImageElement).naturalWidth > 0),
     ),
   ).toBe(true);
@@ -97,6 +97,12 @@ test("initiative priorities, district award graph, and funding story are interac
   await expect(page.locator("#district-award-detail")).toContainText("Project");
   await expect(page.locator("#district-award-detail")).toContainText("Intended impact");
   await expect(page.locator("#district-award-detail")).toContainText("student perspective");
+  await expect(page.locator(".district-logo-rail button.is-related")).toHaveCount(7);
+  await expect(page.locator(".tier-constellation circle")).toHaveCount(7);
+  await page.getByRole("button", { name: /Antelope Valley.*Tier 2 LIFT/ }).click();
+  await expect(page.locator("#district-award-detail")).toContainText("Tier 2 · LIFT");
+  await expect(page.locator(".district-logo-rail button.is-related")).toHaveCount(4);
+  await expect(page.locator(".tier-constellation circle")).toHaveCount(4);
   await page.getByRole("button", { name: "Belonging", exact: true }).click();
   await expect(page.locator("#priority-description")).toContainText(
     "connected, valued",
@@ -113,6 +119,7 @@ test("initiative priorities, district award graph, and funding story are interac
   await page.goto("/#/video");
   await expect(page.locator("video")).toHaveJSProperty("duration", 64);
   await expect(page.locator("video")).toHaveJSProperty("controls", false);
+  expect(await page.locator(".cinema").evaluate((element) => element.getBoundingClientRect().width)).toBeLessThanOrEqual(920);
   await page
     .getByRole("button", { name: /05 Combined impact/ })
     .click();

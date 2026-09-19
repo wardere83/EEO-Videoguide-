@@ -737,18 +737,18 @@ footer {
 /* Cinematic initiative story */
 .film { padding-top: 30px; }
 .film .section-heading { align-items: flex-end; margin-bottom: 22px; }
-.film .section-heading { width: min(100%, 1220px); margin-inline: auto; }
+.film .section-heading { width: min(100%, 920px); margin-inline: auto; }
 .film .section-heading h2 { font-size: clamp(30px, 3vw, 42px); margin-top: 8px; }
 .cinema {
-  left: 50%;
-  width: min(1600px, calc(100vw - 24px));
-  margin-inline: 0;
+  left: auto;
+  width: min(100%, 920px);
+  margin-inline: auto;
   aspect-ratio: 16 / 9;
   border-radius: clamp(22px, 2.2vw, 34px);
   box-shadow: 0 34px 100px rgba(0, 25, 58, .26), 0 8px 28px rgba(0, 39, 85, .16);
   opacity: 0;
   clip-path: inset(5% 7% round 42px);
-  transform: translateX(-50%) translateY(42px) scale(.965);
+  transform: translateY(42px) scale(.965);
   transition: opacity 900ms cubic-bezier(.2, .8, .2, 1),
     transform 1100ms cubic-bezier(.16, 1, .3, 1),
     clip-path 1100ms cubic-bezier(.16, 1, .3, 1),
@@ -758,7 +758,7 @@ footer {
 .cinema.is-visible {
   opacity: 1;
   clip-path: inset(0 round clamp(22px, 2.2vw, 34px));
-  transform: translateX(-50%) translateY(0) scale(1);
+  transform: translateY(0) scale(1);
 }
 .cinema:hover {
   box-shadow: 0 42px 120px rgba(0, 25, 58, .32), 0 12px 38px rgba(0, 72, 145, .2);
@@ -840,7 +840,7 @@ footer {
 .cinema-controls input { width: 100%; accent-color: var(--gold); }
 .cinema-controls span { font-size: 12px; font-variant-numeric: tabular-nums; text-align: center; }
 .story-chapters {
-  width: min(100%, 1220px);
+  width: min(100%, 920px);
   margin-inline: auto;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -1460,4 +1460,181 @@ footer {
   .award-network-heading { align-items: flex-start; }
   .chart-total { width: 100%; min-width: 0; }
   .award-chart-scroll { margin-inline: -8px; width: calc(100% + 16px); padding-inline: 8px; }
+}
+
+/* Looping impact initiatives and district constellation */
+.impact-network {
+  display: grid;
+  grid-template-columns: .72fr 1.28fr;
+  min-height: 820px;
+  margin-top: 74px;
+  overflow: hidden;
+  border: 1px solid #d8e3ec;
+  border-radius: 28px;
+  background: #f6f9fc;
+  box-shadow: 0 24px 70px rgba(0, 39, 85, .12);
+}
+.impact-loop-panel {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  padding: clamp(42px, 5vw, 70px);
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(64, 180, 229, .23), transparent 29%),
+    linear-gradient(155deg, #002f6d, #002755 68%, #001a39);
+}
+.impact-loop-panel::after {
+  content: "";
+  position: absolute;
+  right: -160px;
+  bottom: -150px;
+  width: 420px;
+  height: 420px;
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 50%;
+  box-shadow: 0 0 0 44px rgba(64, 180, 229, .05), 0 0 0 92px rgba(64, 180, 229, .035);
+}
+.impact-loop-panel .eyebrow { color: #b9dcf4; }
+.impact-loop-panel h3 { max-width: 360px; font-size: clamp(35px, 4vw, 50px); }
+.impact-word-window {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 168px;
+  margin: 30px 0 20px;
+  align-items: center;
+  border-block: 1px solid rgba(255, 255, 255, .18);
+}
+.impact-word-window span {
+  display: block;
+  max-width: 390px;
+  color: #8ed4f2;
+  font-family: var(--serif);
+  font-size: clamp(42px, 5vw, 66px);
+  line-height: .96;
+  letter-spacing: -.035em;
+  animation: impact-word-turn 700ms cubic-bezier(.16, 1, .3, 1) both;
+}
+@keyframes impact-word-turn {
+  from { opacity: 0; transform: translateY(42px) rotateX(-14deg); filter: blur(7px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+.impact-loop-copy { position: relative; z-index: 1; max-width: 390px; color: #c7d9e9; font-size: 15px; }
+.impact-loop-progress { position: relative; z-index: 1; display: flex; gap: 7px; margin-top: 24px; }
+.impact-loop-progress i { width: 24px; height: 3px; border-radius: 3px; background: rgba(255, 255, 255, .25); transition: width 400ms ease, background 400ms ease; }
+.impact-loop-progress i.active { width: 48px; background: var(--light-blue); }
+.district-explorer { min-width: 0; padding: clamp(32px, 4vw, 54px); }
+.district-explorer-heading { display: grid; grid-template-columns: 1fr 210px; align-items: end; gap: 30px; }
+.district-explorer-heading .eyebrow { margin-bottom: 14px; color: var(--medium-blue); }
+.district-explorer-heading h3 { max-width: 560px; font-size: clamp(32px, 3.6vw, 46px); }
+.district-explorer-heading > p { margin: 0; color: var(--grey); font-size: 13px; line-height: 1.5; }
+.district-beam-stage {
+  position: relative;
+  min-height: 500px;
+  margin: 24px -18px 0;
+  overflow: hidden;
+  border: 1px solid #d9e5ee;
+  border-radius: 20px 20px 8px 8px;
+  background:
+    radial-gradient(circle at 50% 105%, rgba(0, 102, 186, .21), transparent 38%),
+    linear-gradient(rgba(0, 102, 186, .04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 102, 186, .04) 1px, transparent 1px),
+    white;
+  background-size: auto, 34px 34px, 34px 34px, auto;
+}
+.tier-constellation { position: absolute; inset: 0; width: 100%; height: 100%; }
+.tier-constellation polyline,
+.tier-constellation line {
+  fill: none;
+  stroke: rgba(0, 102, 186, .48);
+  stroke-width: 1.4;
+  stroke-dasharray: 3 8;
+  vector-effect: non-scaling-stroke;
+  animation: constellation-flow 7s linear infinite;
+}
+@keyframes constellation-flow { to { stroke-dashoffset: -88; } }
+.tier-constellation circle { fill: var(--medium-blue); opacity: .82; }
+.tier-constellation circle.selected { fill: white; stroke: var(--gold); stroke-width: 4; opacity: 1; }
+.district-insight {
+  position: relative;
+  z-index: 2;
+  width: min(690px, calc(100% - 56px));
+  margin: 48px auto 0;
+  padding: 28px;
+  border: 1px solid #d5e1eb;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .94);
+  box-shadow: 0 24px 60px rgba(0, 47, 109, .18);
+  opacity: 0;
+  transform: translateY(80px) scale(.97);
+}
+.impact-network.is-visible .district-insight { animation: district-beam-up 850ms cubic-bezier(.16, 1, .3, 1) 120ms forwards; }
+@keyframes district-beam-up { to { opacity: 1; transform: none; } }
+.district-insight-topline { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.district-insight-topline span { padding: 6px 10px; border-radius: 999px; color: var(--medium-blue); background: #e9f4fb; font-size: 10px; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+.district-insight-topline strong { color: var(--navy); font-family: var(--serif); font-size: 38px; line-height: 1; }
+.district-insight > p { margin: 18px 0 2px; color: #617487; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.district-insight h4 { margin: 4px 0 22px; color: var(--navy); font-size: 24px; }
+.district-insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; overflow: hidden; border: 1px solid #dce6ee; border-radius: 12px; background: #dce6ee; }
+.district-insight-grid > div { padding: 18px; background: #f8fafc; }
+.district-insight-grid span { color: var(--medium-blue); font-size: 10px; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+.district-insight-grid p { margin: 7px 0 0; color: var(--grey); font-size: 13px; line-height: 1.5; }
+.district-insight > button { display: flex; align-items: center; gap: 8px; margin-top: 18px; border: 0; padding: 0; color: var(--navy); background: none; font-size: 12px; font-weight: 700; }
+.district-logo-rail {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+  gap: 6px;
+  margin: -14px -18px 0;
+  padding: 18px;
+  border: 1px solid #d9e5ee;
+  border-radius: 0 0 20px 20px;
+  background: #eef4f8;
+}
+.district-logo-rail button {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 84px;
+  padding: 9px 5px 12px;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  color: #556a7d;
+  background: white;
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease, opacity 220ms ease;
+}
+.district-logo-rail button:not(.is-related) { opacity: .46; }
+.district-logo-rail button.is-related { border-color: rgba(0, 102, 186, .34); }
+.district-logo-rail button:hover,
+.district-logo-rail button[aria-pressed="true"] { z-index: 1; opacity: 1; transform: translateY(-7px); border-color: var(--navy); box-shadow: 0 12px 28px rgba(0, 47, 109, .18); }
+.district-logo-rail img { width: 62px; height: 34px; object-fit: contain; }
+.district-logo-rail span { overflow: hidden; width: 100%; margin-top: 5px; font-size: 8px; font-weight: 650; line-height: 1.1; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
+.district-logo-rail i { position: absolute; bottom: 5px; width: 4px; height: 4px; border-radius: 50%; background: #a7b7c5; }
+.district-logo-rail button.is-related i { background: var(--medium-blue); box-shadow: 0 0 0 4px rgba(0, 102, 186, .1); }
+.district-logo-rail button[aria-pressed="true"] i { background: var(--gold); box-shadow: 0 0 0 5px rgba(255, 182, 0, .14); }
+.district-tier-key { display: flex; align-items: center; justify-content: flex-end; gap: 12px; margin: 14px 0 0; color: #687b8d; font-size: 10px; }
+.district-tier-key span { padding: 4px 8px; border: 1px solid #cbd9e4; border-radius: 999px; color: var(--navy); background: white; font-weight: 700; }
+@media (max-width: 980px) {
+  .impact-network { grid-template-columns: 1fr; }
+  .impact-loop-panel { min-height: 520px; }
+}
+@media (max-width: 680px) {
+  .impact-network { margin-top: 48px; border-radius: 20px; }
+  .impact-loop-panel { min-height: 430px; padding: 34px 24px; }
+  .impact-word-window { min-height: 126px; }
+  .district-explorer { padding: 32px 18px; }
+  .district-explorer-heading { grid-template-columns: 1fr; gap: 14px; }
+  .district-beam-stage { min-height: 590px; margin-inline: 0; }
+  .tier-constellation { display: none; }
+  .district-insight { width: calc(100% - 28px); margin-top: 28px; padding: 22px; }
+  .district-insight-grid { grid-template-columns: 1fr; }
+  .district-logo-rail { display: flex; margin-inline: 0; overflow-x: auto; }
+  .district-logo-rail button { flex: 0 0 88px; }
+  .district-tier-key { align-items: flex-end; flex-wrap: wrap; }
 }
