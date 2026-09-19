@@ -99,20 +99,18 @@ export function Video({ showChapters = false }: { showChapters?: boolean }) {
         </div>
       </div>
 
-      {showChapters && (
-        <div className="story-chapters" aria-label="Explore the initiative story">
-          {chapters.map((chapter, index) => (
-            <button
-              key={chapter.label}
-              onClick={() => seek(chapter.time)}
-              aria-current={activeChapter === index ? "true" : undefined}
-            >
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              {chapter.label}
-            </button>
-          ))}
-        </div>
-      )}
+      <div className="story-chapters" aria-label="Explore the initiative story">
+        {chapters.map((chapter, index) => (
+          <button
+            key={chapter.label}
+            onClick={() => seek(chapter.time)}
+            aria-current={activeChapter === index ? "true" : undefined}
+          >
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            {chapter.label}
+          </button>
+        ))}
+      </div>
 
       <section className="funding-story" aria-labelledby="funding-title">
         <div className="funding-intro">
