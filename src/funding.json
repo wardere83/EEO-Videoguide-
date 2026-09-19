@@ -1,0 +1,42 @@
+[
+  {
+    "id": "foundation",
+    "year": "2021",
+    "amount": "$20M",
+    "label": "Statewide EEO foundation",
+    "detail": "AB 132 established a $20 million one-time EEO Best Practices Fund. Approximately $15.5 million was apportioned to eligible districts in 2021–22.",
+    "note": "$15.5M apportioned systemwide",
+    "time": 8,
+    "source": "https://www.cccco.edu/-/media/CCCCO-Website/docs/memo/finalmemorandumeeoibprfareleasememo1252022a11y.pdf"
+  },
+  {
+    "id": "first-cycle",
+    "year": "2023–25",
+    "amount": "$5.65M",
+    "label": "First competitive EEO IBP cycle",
+    "detail": "The Chancellor’s Office awarded $5,651,806 to 21 districts after adding funding to the competitive grant fund.",
+    "note": "21 district awards",
+    "time": 20,
+    "source": "https://www.cccco.edu/-/media/CCCCO-Website/docs/memo/memorandum-cccco-eeo-ibp-grants-notification-of-intent-to-award-a11y.pdf"
+  },
+  {
+    "id": "current-cycle",
+    "year": "2026–28",
+    "amount": "$1.4M",
+    "label": "Current competitive EEO IBP cycle",
+    "detail": "Eleven districts received awards of $100,000 or $150,000 to advance innovative employment practices.",
+    "note": "11 district awards",
+    "time": 32,
+    "source": "https://www.cccco.edu/-/media/CCCCO-Website/docs/memo/memorandum-cccco-eeo-ibp-grants-notification-of-intent-to-award-2025-a11y.pdf"
+  },
+  {
+    "id": "competitive-total",
+    "year": "Since launch",
+    "amount": "$7.05M",
+    "label": "Published competitive awards",
+    "detail": "Across the two published EEO IBP cycles, CCCCO committed $7,051,806 through 32 district award selections. The statewide apportionment is shown separately to avoid double counting.",
+    "note": "Two competitive cycles",
+    "time": 44,
+    "source": "https://www.cccco.edu/About-Us/Chancellors-Office/Divisions/Institutional-Effectiveness/Grant-Opportunities/Equal-Employment-Opportunities-Innovative-Best-Practices-Grants/"
+  }
+]

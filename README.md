@@ -19,7 +19,7 @@ The unmodified three-color horizontal SVG in `public/brand/cccco-logo.svg` comes
 
 ## Publishing
 
-Pull requests run the production build. Merging into main builds `dist` and deploys it through the existing GitHub Pages workflow. `public/CNAME` preserves eeodashboard.io. The old stream is replaced by a new 100-second 1080p silent initiative film, with English captions, a transcript, and thematic chapter navigation. The video has no narration or music. The 11 districts appear only within the film, in a brief project showcase. `src/film.json` controls its storyline and `src/grantees.json` contains only short public-facing project summaries; see `docs/content-sources.md`. `scripts/render-film.py` reproduces the video using Pillow and ffmpeg with the official logo PNG. The externally hosted portal handles district permissions and sign-in.
+Pull requests run the production build. Merging into main builds `dist` and deploys it through the existing GitHub Pages workflow. `public/CNAME` preserves eeodashboard.io. The site features a 78-second silent motion story with English captions, a transcript, custom playback controls, interactive chapters, and a funding explorer grounded in published CCCCO records. The video contains no audio stream. The 11 current districts appear within the motion story. `src/film.json`, `src/funding.json`, and `src/grantees.json` control the public narrative; see `docs/content-sources.md`. `scripts/render-film.py` reproduces the video using Pillow and ffmpeg with the official logo PNG. The externally hosted portal handles district permissions and sign-in.
 
 The WebM fallback supports browsers without H.264 playback. The browser tests require `npx playwright install chromium --with-deps`.
 

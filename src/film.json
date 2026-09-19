@@ -1,141 +1,45 @@
 [
   {
-    "duration": 6,
+    "duration": 8,
     "label": "EQUAL EMPLOYMENT OPPORTUNITY",
-    "title": "Opportunity for everyone.",
-    "description": "The EEO Innovative Best Practices Grant Initiative.",
-    "motif": "opportunity"
+    "title": "Opportunity, set in motion.",
+    "description": "The EEO Innovative Best Practices Grant Initiative advances bold approaches to recruitment, professional growth, and belonging."
   },
   {
-    "duration": 6,
-    "label": "CALIFORNIA COMMUNITY COLLEGES",
-    "title": "A more inclusive future.",
-    "description": "Advancing faculty and staff diversity through innovative institutional practices.",
-    "motif": "community"
+    "duration": 12,
+    "label": "THE FOUNDATION · 2021",
+    "title": "$20 million for statewide EEO progress.",
+    "description": "AB 132 created a one-time EEO Best Practices Fund. Approximately $15.5 million was apportioned to eligible districts in 2021–22."
   },
   {
-    "duration": 6,
-    "label": "RECRUITMENT",
-    "title": "Open more pathways.",
-    "description": "Explore new approaches to equitable recruitment and inclusive hiring.",
-    "motif": "pathways"
+    "duration": 12,
+    "label": "FIRST COMPETITIVE CYCLE · 2023–25",
+    "title": "$5,651,806 awarded to 21 districts.",
+    "description": "The Chancellor’s Office added funding to expand the first competitive EEO IBP award cycle."
   },
   {
-    "duration": 6,
-    "label": "PROFESSIONAL GROWTH",
-    "title": "Help people thrive.",
-    "description": "Create space for mentorship, learning, and professional growth.",
-    "motif": "growth"
-  },
-  {
-    "duration": 6,
-    "label": "BELONGING",
-    "title": "Build stronger connections.",
-    "description": "Support workplace cultures where faculty and staff can belong and contribute.",
-    "motif": "community"
+    "duration": 12,
+    "label": "CURRENT CYCLE · 2026–28",
+    "title": "$1.4 million across 11 districts.",
+    "description": "Awards of $100,000 and $150,000 support innovative pre-hiring, post-hiring, and EEO interventions."
   },
   {
     "duration": 10,
-    "label": "THE INITIATIVE IN ACTION",
-    "title": "Distinct ideas. Shared purpose.",
-    "districts": [
-      {
-        "name": "Allan Hancock Joint CCD",
-        "description": "Strengthening equitable hiring and faculty mentorship."
-      },
-      {
-        "name": "Antelope Valley CCD",
-        "description": "Connecting employees through the LIFT Mentor Match program."
-      },
-      {
-        "name": "Citrus CCD",
-        "description": "Expanding access to mentorship and professional development."
-      }
-    ],
-    "description": "Allan Hancock Joint CCD: Strengthening equitable hiring and faculty mentorship. Antelope Valley CCD: Connecting employees through the LIFT Mentor Match program. Citrus CCD: Expanding access to mentorship and professional development."
+    "label": "COMPETITIVE AWARDS SINCE LAUNCH",
+    "title": "$7,051,806 committed through two cycles.",
+    "description": "Thirty-two district award selections turn statewide investment into local experimentation and shared learning."
   },
   {
-    "duration": 10,
-    "label": "THE INITIATIVE IN ACTION",
-    "title": "Distinct ideas. Shared purpose.",
-    "districts": [
-      {
-        "name": "Kern CCD",
-        "description": "Combining virtual reality faculty development with peer mentoring."
-      },
-      {
-        "name": "Mt. San Antonio CCD",
-        "description": "Advancing belonging through mentorship and restorative practices."
-      },
-      {
-        "name": "North Orange County CCD",
-        "description": "Strengthening inclusive hiring through training, student voice, and data."
-      }
-    ],
-    "description": "Kern CCD: Combining virtual reality faculty development with peer mentoring. Mt. San Antonio CCD: Advancing belonging through mentorship and restorative practices. North Orange County CCD: Strengthening inclusive hiring through training, student voice, and data."
-  },
-  {
-    "duration": 10,
-    "label": "THE INITIATIVE IN ACTION",
-    "title": "Distinct ideas. Shared purpose.",
-    "districts": [
-      {
-        "name": "Peralta CCD",
-        "description": "Connecting classified professionals with mentorship and leadership opportunities."
-      },
-      {
-        "name": "San Diego CCD",
-        "description": "Advancing transparent and equitable recruitment through TRACE."
-      },
-      {
-        "name": "Santa Monica CCD",
-        "description": "Fostering belonging through professional development, mentorship, and employee resource groups."
-      }
-    ],
-    "description": "Peralta CCD: Connecting classified professionals with mentorship and leadership opportunities. San Diego CCD: Advancing transparent and equitable recruitment through TRACE. Santa Monica CCD: Fostering belonging through professional development, mentorship, and employee resource groups."
-  },
-  {
-    "duration": 10,
-    "label": "THE INITIATIVE IN ACTION",
-    "title": "Distinct ideas. Shared purpose.",
-    "districts": [
-      {
-        "name": "State Center CCD",
-        "description": "Preparing prospective faculty through mentored Faculty in Training internships."
-      },
-      {
-        "name": "West Valley-Mission CCD",
-        "description": "Expanding equitable professional development through LIFT mentorship."
-      }
-    ],
-    "description": "State Center CCD: Preparing prospective faculty through mentored Faculty in Training internships. West Valley-Mission CCD: Expanding equitable professional development through LIFT mentorship."
-  },
-  {
-    "duration": 7,
-    "label": "INNOVATION",
-    "title": "Make room for new ideas.",
-    "description": "Pilot promising practices. Strengthen existing efforts. Keep opportunity at the center.",
-    "motif": "growth"
-  },
-  {
-    "duration": 7,
-    "label": "COLLABORATION",
-    "title": "Move forward, together.",
-    "description": "Connect ideas and people around a shared commitment to equal employment opportunity.",
-    "motif": "community"
+    "duration": 16,
+    "label": "THE CURRENT COHORT",
+    "title": "Eleven districts. Distinct ideas. Shared purpose.",
+    "description": "Mentorship, inclusive hiring, faculty pathways, restorative practice, professional learning, and data-informed recruitment.",
+    "transcript": "Current grantees are Allan Hancock Joint CCD, Antelope Valley CCD, Citrus CCD, Kern CCD, Mt. San Antonio CCD, North Orange County CCD, Peralta CCD, San Diego CCD, Santa Monica CCD, State Center CCD, and West Valley-Mission CCD."
   },
   {
     "duration": 8,
-    "label": "A SHARED FUTURE",
-    "title": "Better practices.\nBroader opportunity.",
-    "description": "EEO Innovative Best Practices Grant Initiative.",
-    "motif": "pathways"
-  },
-  {
-    "duration": 8,
-    "label": "EXPLORE THE INITIATIVE",
-    "title": "Be part of what comes next.",
-    "description": "California Community Colleges Chancellor\u2019s Office\neeodashboard.io",
-    "motif": "opportunity"
+    "label": "THE WORK CONTINUES",
+    "title": "Better practices. Broader opportunity.",
+    "description": "California Community Colleges Chancellor’s Office · eeodashboard.io"
   }
 ]

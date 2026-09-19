@@ -76,7 +76,7 @@ test("desktop and mobile layout and navigation", async ({ page }) => {
   await page.screenshot({ path: "/tmp/eeo-mobile.png", fullPage: true });
 });
 
-test("initiative priorities and film chapters work without a district directory", async ({
+test("initiative priorities and interactive funding story work without a district directory", async ({
   page,
 }) => {
   await page.goto("/");
@@ -100,18 +100,22 @@ test("initiative priorities and film chapters work without a district directory"
       .getByRole("link", { name: "Film", exact: true }),
   ).toHaveCount(0);
   await page.goto("/#/video");
-  await expect(page.locator("video")).toHaveJSProperty("duration", 100);
+  await expect(page.locator("video")).toHaveJSProperty("duration", 78);
+  await expect(page.locator("video")).toHaveJSProperty("controls", false);
   await page
-    .getByRole("button", { name: "A shared future", exact: true })
+    .getByRole("button", { name: /05 Combined impact/ })
     .click();
   await expect
     .poll(async () =>
       page.locator("video").evaluate((v: HTMLVideoElement) => v.currentTime),
     )
-    .toBeGreaterThanOrEqual(70);
+    .toBeGreaterThanOrEqual(44);
   await expect(page.locator("video")).toHaveJSProperty("paused", false);
+  await page.getByRole("tab", { name: /2026–28 \$1.4M/ }).click();
+  await expect(page.getByRole("tabpanel")).toContainText("11 district awards");
+  await expect(page.getByRole("tabpanel")).toContainText("$1.4M");
   await page.getByText("Read transcript", { exact: true }).click();
-  await expect(page.locator(".film-chapters details")).toContainText(
+  await expect(page.locator(".transcript")).toContainText(
     "West Valley-Mission CCD",
   );
 });

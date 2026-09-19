@@ -37,7 +37,7 @@ export default function App() {
                   <h1>EEO IBP Initiative</h1>
                   <p>Innovative Best Practices Grant Initiative</p>
                 </section>
-                <Video chapters />
+                <Video showChapters />
               </>
             }
           />
