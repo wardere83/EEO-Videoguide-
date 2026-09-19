@@ -17,7 +17,9 @@ const chapters = [
 
 export function Video({ showChapters = false }: { showChapters?: boolean }) {
   const video = useRef<HTMLVideoElement>(null);
+  const cinema = useRef<HTMLDivElement>(null);
   const [playing, setPlaying] = useState(true);
+  const [cinemaVisible, setCinemaVisible] = useState(false);
   const [time, setTime] = useState(0);
   const [duration, setDuration] = useState(64);
   const [selected, setSelected] = useState(0);
@@ -27,6 +29,49 @@ export function Video({ showChapters = false }: { showChapters?: boolean }) {
     video.current.muted = true;
     video.current.defaultMuted = true;
     void video.current.play().catch(() => setPlaying(false));
+  }, []);
+
+  useEffect(() => {
+    const frame = cinema.current;
+    if (!frame) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) {
+      setCinemaVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setCinemaVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.16 },
+    );
+    observer.observe(frame);
+
+    let animationFrame = 0;
+    const updateDepth = () => {
+      animationFrame = 0;
+      const rect = frame.getBoundingClientRect();
+      const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)));
+      frame.style.setProperty("--film-depth", progress.toFixed(3));
+      frame.style.setProperty("--film-scale", (1.012 + progress * 0.024).toFixed(4));
+      frame.style.setProperty("--film-shift", `${((progress - 0.5) * -18).toFixed(2)}px`);
+    };
+    const onScroll = () => {
+      if (!animationFrame) animationFrame = window.requestAnimationFrame(updateDepth);
+    };
+    updateDepth();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+    };
   }, []);
 
   function seek(next: number) {
@@ -46,6 +91,10 @@ export function Video({ showChapters = false }: { showChapters?: boolean }) {
   }
 
   const item = funding[selected];
+  const activeChapter = chapters.reduce(
+    (current, chapter, index) => (time >= chapter.time ? index : current),
+    0,
+  );
 
   return (
     <section className="width film" id="initiative-story" aria-labelledby="story-title">
@@ -56,7 +105,11 @@ export function Video({ showChapters = false }: { showChapters?: boolean }) {
         </div>
       </div>
 
-      <div className="cinema">
+      <div
+        ref={cinema}
+        className={`cinema${cinemaVisible ? " is-visible" : ""}`}
+        data-playing={playing}
+      >
         <video
           ref={video}
           autoPlay
@@ -78,6 +131,9 @@ export function Video({ showChapters = false }: { showChapters?: boolean }) {
           <track kind="captions" src="./media/eeo-initiative.en.vtt" srcLang="en" label="English" />
         </video>
 
+        <div className="cinema-sheen" aria-hidden="true" />
+        <div className="cinema-vignette" aria-hidden="true" />
+
         <div className="cinema-controls">
           <button onClick={togglePlayback} aria-label={playing ? "Pause video" : "Play video"}>
             {playing ? <Pause size={17} /> : <Play size={17} fill="currentColor" />}
@@ -97,7 +153,11 @@ export function Video({ showChapters = false }: { showChapters?: boolean }) {
 
       <div className="story-chapters" aria-label="Explore the initiative story">
         {chapters.map((chapter, index) => (
-          <button key={chapter.label} onClick={() => seek(chapter.time)}>
+          <button
+            key={chapter.label}
+            onClick={() => seek(chapter.time)}
+            aria-current={activeChapter === index ? "true" : undefined}
+          >
             <span>{String(index + 1).padStart(2, "0")}</span>
             {chapter.label}
           </button>
