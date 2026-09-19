@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Play } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Video } from "../components/Video";
 import { links } from "../config";
 
@@ -36,9 +36,6 @@ export function Home() {
           to recruitment, professional growth, and belonging.
         </p>
         <div className="actions">
-          <Link className="button" to="/video">
-            Watch the initiative film <Play size={16} />
-          </Link>
           <Link className="text-link" to="/resources">
             Explore resources <ArrowUpRight size={18} />
           </Link>

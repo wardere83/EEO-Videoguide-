@@ -45,7 +45,6 @@ export function Layout() {
               Initiative
             </NavLink>
             <NavLink to="/resources">Resources</NavLink>
-            <NavLink to="/video">Film</NavLink>
             <a className="button small outline" href={links.portal}>
               Open dashboard <ArrowUpRight size={16} />
             </a>

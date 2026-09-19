@@ -31,12 +31,12 @@ export const resources = [
     label: "Open NOVA",
   },
   {
-    title: "Initiative overview film",
+    title: "Initiative overview",
     category: "Training",
     description:
       "Discover the initiative’s purpose and the possibilities it supports.",
     href: "/#/video",
-    label: "Watch the film",
+    label: "View the overview",
   },
   {
     title: "CCCCO brand assets",

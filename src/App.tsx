@@ -34,10 +34,10 @@ export default function App() {
               <>
                 <section className="width video-intro">
                   <p className="eyebrow">Learn & share</p>
-                  <h1>EEO IBP Initiative Film</h1>
+                  <h1>EEO IBP Initiative</h1>
                   <p>Innovative Best Practices Grant Initiative</p>
                 </section>
-                <Video immediate chapters />
+                <Video chapters />
               </>
             }
           />

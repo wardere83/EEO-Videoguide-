@@ -11,6 +11,11 @@ test("public routes, resource filtering, video, and portal destination", async (
   await expect(
     page.getByRole("link", { name: "Open dashboard", exact: true }),
   ).toHaveAttribute("href", "https://eeo.bulleconsulting.com");
+  const homeVideo = page.locator("video");
+  await expect(homeVideo).toHaveJSProperty("muted", true);
+  await expect(homeVideo).toHaveJSProperty("loop", true);
+  await expect(homeVideo).toHaveJSProperty("controls", false);
+  await expect.poll(() => homeVideo.evaluate((v) => v.paused)).toBe(false);
   await page
     .getByRole("navigation", { name: "Main navigation" })
     .getByRole("link", { name: "Resources", exact: true })
@@ -22,14 +27,14 @@ test("public routes, resource filtering, video, and portal destination", async (
   await page.getByRole("button", { name: "Clear filters" }).click();
   await expect(page.locator(".resource-grid article")).toHaveCount(5);
   await page.getByRole("button", { name: "Training", exact: true }).click();
-  await page.getByRole("link", { name: "Watch the film" }).click();
+  await page.getByRole("link", { name: "View the overview" }).click();
   await expect(page.locator('video source[type="video/mp4"]')).toHaveAttribute(
     "src",
     /eeo-initiative.mp4/,
   );
   await page.reload();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "EEO IBP Initiative Film",
+    "EEO IBP Initiative",
   );
   await page.goto("/#/missing");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
@@ -89,10 +94,12 @@ test("initiative priorities and film chapters work without a district directory"
   await expect(page.locator("#priority-description")).toContainText(
     "mentorship",
   );
-  await page
-    .getByRole("navigation", { name: "Main navigation" })
-    .getByRole("link", { name: "Film", exact: true })
-    .click();
+  await expect(
+    page
+      .getByRole("navigation", { name: "Main navigation" })
+      .getByRole("link", { name: "Film", exact: true }),
+  ).toHaveCount(0);
+  await page.goto("/#/video");
   await expect(page.locator("video")).toHaveJSProperty("duration", 100);
   await page
     .getByRole("button", { name: "A shared future", exact: true })
@@ -103,7 +110,7 @@ test("initiative priorities and film chapters work without a district directory"
     )
     .toBeGreaterThanOrEqual(70);
   await expect(page.locator("video")).toHaveJSProperty("paused", false);
-  await page.getByText("Read the film transcript", { exact: true }).click();
+  await page.getByText("Read transcript", { exact: true }).click();
   await expect(page.locator(".film-chapters details")).toContainText(
     "West Valley-Mission CCD",
   );
