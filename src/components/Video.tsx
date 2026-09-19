@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Pause, Play } from "lucide-react";
 import film from "../film.json";
 import funding from "../funding.json";
+import { DistrictGraph } from "./DistrictGraph";
 
 const media = "./media/eeo-initiative.mp4";
 const chapters = [
@@ -102,6 +103,8 @@ export function Video({ showChapters = false }: { showChapters?: boolean }) {
           </button>
         ))}
       </div>
+
+      <DistrictGraph onEnterFilm={() => seek(54)} />
 
       <section className="funding-story" aria-labelledby="funding-title">
         <div className="funding-intro">

@@ -147,21 +147,37 @@ def funding_scene(draw, scene, local, duration, amount, caption, supporting):
 
 def district_scene(draw, scene, local, duration):
     opacity = fade_window(local, duration)
+    arrival = ease(local / 1.7)
     draw.text((62, 148), scene["label"], font=bold(17), fill=alpha(GOLD, opacity))
-    draw.text((58, 191), scene["title"], font=serif(58), fill=alpha(WHITE, opacity))
-    draw.text((60, 263), scene["description"], font=regular(21), fill=alpha(MIST, opacity))
-    active = min(10, int(local / (duration / 11)))
+    draw.text((58, 188), scene["title"], font=serif(48), fill=alpha(WHITE, opacity * arrival))
+    draw.text((60, 246), scene["description"], font=regular(18), fill=alpha(MIST, opacity * arrival))
+
+    cx, cy = 640, 465
+    positions = []
     for index, district in enumerate(districts):
-        col, row = index % 2, index // 2
-        x = 62 + col * 600
-        y = 330 + row * 50
-        is_active = index == active
-        line_opacity = opacity * (1 if is_active else .48)
-        if is_active:
-            draw.rounded_rectangle((x - 12, y - 8, x + 555, y + 34), radius=18, fill=alpha(BLUE, .55 * opacity))
-            draw.ellipse((x + 520, y + 4, x + 531, y + 15), fill=alpha(GOLD, opacity))
-        draw.text((x, y), district["name"], font=bold(17 if is_active else 15), fill=alpha(WHITE, line_opacity))
-        draw.text((x + 275, y + 1), district["focus"].upper(), font=regular(11), fill=alpha(GOLD if is_active else MIST, line_opacity), anchor="ma")
+        angle = -math.pi / 2 + index * (2 * math.pi / len(districts))
+        positions.append((cx + math.cos(angle) * 500, cy + math.sin(angle) * 172))
+
+    for index, (x, y) in enumerate(positions):
+        reveal = ease((local - index * .09) / 1.1)
+        draw.line((cx, cy, x, y), fill=alpha(MIST, opacity * reveal * .24), width=2)
+        travel = (local * .32 + index / len(districts)) % 1
+        px, py = cx + (x - cx) * travel, cy + (y - cy) * travel
+        draw.ellipse((px - 3, py - 3, px + 3, py + 3), fill=alpha(GOLD, opacity * reveal * .8))
+
+    draw.ellipse((cx - 91, cy - 91, cx + 91, cy + 91), fill=alpha(DEEP, opacity * .96), outline=alpha(GOLD, opacity), width=3)
+    draw.ellipse((cx - 108, cy - 108, cx + 108, cy + 108), outline=alpha(MIST, opacity * .22), width=2)
+    draw.text((cx, cy - 23), "$1.4M", font=serif(48), fill=alpha(WHITE, opacity), anchor="mm")
+    draw.text((cx, cy + 22), "11 DISTRICTS", font=bold(13), fill=alpha(GOLD, opacity), anchor="mm")
+    draw.text((cx, cy + 46), "2026–28", font=regular(12), fill=alpha(MIST, opacity), anchor="mm")
+
+    for index, (x, y) in enumerate(positions):
+        district = districts[index]
+        reveal = ease((local - index * .09) / 1.1)
+        box = (x - 75, y - 28, x + 75, y + 28)
+        draw.rounded_rectangle(box, radius=12, fill=alpha(NAVY, opacity * reveal * .96), outline=alpha(MIST, opacity * reveal * .36), width=1)
+        draw.text((x, y - 8), district["shortName"], font=bold(12), fill=alpha(WHITE, opacity * reveal), anchor="mm")
+        draw.text((x, y + 12), f'${district["award"] // 1000}K', font=bold(15), fill=alpha(GOLD, opacity * reveal), anchor="mm")
 
 
 def render_scene(index, local, frame_no):

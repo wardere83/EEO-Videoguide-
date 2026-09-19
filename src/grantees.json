@@ -2,6 +2,8 @@
   {
     "id": "ahc",
     "name": "Allan Hancock Joint CCD",
+    "shortName": "Allan Hancock",
+    "award": 100000,
     "city": "Santa Maria",
     "focus": "Hiring & mentorship",
     "description": "Strengthening equitable hiring and faculty mentorship.",
@@ -10,6 +12,8 @@
   {
     "id": "avc",
     "name": "Antelope Valley CCD",
+    "shortName": "Antelope Valley",
+    "award": 100000,
     "city": "Lancaster",
     "focus": "LIFT mentorship",
     "description": "Connecting employees through the LIFT Mentor Match program.",
@@ -18,6 +22,8 @@
   {
     "id": "citrus",
     "name": "Citrus CCD",
+    "shortName": "Citrus",
+    "award": 100000,
     "city": "Glendora",
     "focus": "LIFT mentorship",
     "description": "Expanding access to mentorship and professional development.",
@@ -26,6 +32,8 @@
   {
     "id": "kern",
     "name": "Kern CCD",
+    "shortName": "Kern",
+    "award": 150000,
     "city": "Bakersfield",
     "focus": "Faculty development",
     "description": "Combining virtual reality faculty development with peer mentoring.",
@@ -34,6 +42,8 @@
   {
     "id": "mtsac",
     "name": "Mt. San Antonio CCD",
+    "shortName": "Mt. San Antonio",
+    "award": 150000,
     "city": "Walnut",
     "focus": "Belonging & mentorship",
     "description": "Advancing belonging through mentorship and restorative practices.",
@@ -42,6 +52,8 @@
   {
     "id": "nocccd",
     "name": "North Orange County CCD",
+    "shortName": "North Orange County",
+    "award": 150000,
     "city": "Anaheim",
     "focus": "Inclusive hiring",
     "description": "Strengthening inclusive hiring through training, student voice, and data.",
@@ -50,6 +62,8 @@
   {
     "id": "peralta",
     "name": "Peralta CCD",
+    "shortName": "Peralta",
+    "award": 100000,
     "city": "Oakland",
     "focus": "LIFT mentorship",
     "description": "Connecting classified professionals with mentorship and leadership opportunities.",
@@ -58,6 +72,8 @@
   {
     "id": "sdccd",
     "name": "San Diego CCD",
+    "shortName": "San Diego",
+    "award": 150000,
     "city": "San Diego",
     "focus": "Equitable recruitment",
     "description": "Advancing transparent and equitable recruitment through TRACE.",
@@ -66,6 +82,8 @@
   {
     "id": "smc",
     "name": "Santa Monica CCD",
+    "shortName": "Santa Monica",
+    "award": 150000,
     "city": "Santa Monica",
     "focus": "Workforce belonging",
     "description": "Fostering belonging through professional development, mentorship, and employee resource groups.",
@@ -74,6 +92,8 @@
   {
     "id": "scccd",
     "name": "State Center CCD",
+    "shortName": "State Center",
+    "award": 150000,
     "city": "Fresno",
     "focus": "Faculty pathways",
     "description": "Preparing prospective faculty through mentored Faculty in Training internships.",
@@ -82,6 +102,8 @@
   {
     "id": "wvm",
     "name": "West Valley-Mission CCD",
+    "shortName": "West Valley–Mission",
+    "award": 100000,
     "city": "Saratoga",
     "focus": "LIFT mentorship",
     "description": "Expanding equitable professional development through LIFT mentorship.",

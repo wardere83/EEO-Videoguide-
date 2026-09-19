@@ -76,16 +76,18 @@ test("desktop and mobile layout and navigation", async ({ page }) => {
   await page.screenshot({ path: "/tmp/eeo-mobile.png", fullPage: true });
 });
 
-test("initiative priorities and interactive funding story work without a district directory", async ({
+test("initiative priorities, district award graph, and funding story are interactive", async ({
   page,
 }) => {
   await page.goto("/");
   await expect(
     page.getByRole("link", { name: "Grantees", exact: true }),
   ).toHaveCount(0);
-  await expect(
-    page.getByText("Allan Hancock Joint CCD", { exact: true }),
-  ).toHaveCount(0);
+  await expect(page.locator(".network-node")).toHaveCount(11);
+  await expect(page.getByRole("button", { name: /Allan Hancock.*\$100,000/ })).toBeVisible();
+  await page.getByRole("button", { name: /North Orange County.*\$150,000/ }).click();
+  await expect(page.locator("#district-award-detail")).toContainText("North Orange County CCD");
+  await expect(page.locator("#district-award-detail")).toContainText("$150,000");
   await page.getByRole("button", { name: "Belonging", exact: true }).click();
   await expect(page.locator("#priority-description")).toContainText(
     "connected, valued",
