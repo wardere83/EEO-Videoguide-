@@ -1,0 +1,90 @@
+[
+  {
+    "id": "ahc",
+    "name": "Allan Hancock Joint CCD",
+    "city": "Santa Maria",
+    "focus": "Hiring & mentorship",
+    "description": "Strengthening equitable hiring and faculty mentorship.",
+    "start": 18
+  },
+  {
+    "id": "avc",
+    "name": "Antelope Valley CCD",
+    "city": "Lancaster",
+    "focus": "LIFT mentorship",
+    "description": "Connecting employees through the LIFT Mentor Match program.",
+    "start": 24
+  },
+  {
+    "id": "citrus",
+    "name": "Citrus CCD",
+    "city": "Glendora",
+    "focus": "LIFT mentorship",
+    "description": "Expanding access to mentorship and professional development.",
+    "start": 30
+  },
+  {
+    "id": "kern",
+    "name": "Kern CCD",
+    "city": "Bakersfield",
+    "focus": "Faculty development",
+    "description": "Combining virtual reality faculty development with peer mentoring.",
+    "start": 36
+  },
+  {
+    "id": "mtsac",
+    "name": "Mt. San Antonio CCD",
+    "city": "Walnut",
+    "focus": "Belonging & mentorship",
+    "description": "Advancing belonging through mentorship and restorative practices.",
+    "start": 42
+  },
+  {
+    "id": "nocccd",
+    "name": "North Orange County CCD",
+    "city": "Anaheim",
+    "focus": "Inclusive hiring",
+    "description": "Strengthening inclusive hiring through training, student voice, and data.",
+    "start": 48
+  },
+  {
+    "id": "peralta",
+    "name": "Peralta CCD",
+    "city": "Oakland",
+    "focus": "LIFT mentorship",
+    "description": "Connecting classified professionals with mentorship and leadership opportunities.",
+    "start": 54
+  },
+  {
+    "id": "sdccd",
+    "name": "San Diego CCD",
+    "city": "San Diego",
+    "focus": "Equitable recruitment",
+    "description": "Advancing transparent and equitable recruitment through TRACE.",
+    "start": 60
+  },
+  {
+    "id": "smc",
+    "name": "Santa Monica CCD",
+    "city": "Santa Monica",
+    "focus": "Workforce belonging",
+    "description": "Fostering belonging through professional development, mentorship, and employee resource groups.",
+    "start": 66
+  },
+  {
+    "id": "scccd",
+    "name": "State Center CCD",
+    "city": "Fresno",
+    "focus": "Faculty pathways",
+    "description": "Preparing prospective faculty through mentored Faculty in Training internships.",
+    "start": 72
+  },
+  {
+    "id": "wvm",
+    "name": "West Valley-Mission CCD",
+    "city": "Saratoga",
+    "focus": "LIFT mentorship",
+    "description": "Expanding equitable professional development through LIFT mentorship.",
+    "start": 78
+  }
+]

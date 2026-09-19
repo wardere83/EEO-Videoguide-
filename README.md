@@ -1,34 +1,24 @@
-# EEO Video Guide
+# EEO IBP Grant Initiative
 
-Single-page video guide for the Equal Employment Opportunity **Institutional Best
-Practices (IBP) Grant Initiative**, California Community Colleges Chancellor's Office.
-Live at [eeodashboard.io](https://eeodashboard.io).
+React + TypeScript + Vite experience for eeodashboard.io. Adapts XpressTend’s public landing page, video feature, capability showcase, resource destination, and separate routed screens to CCCCO’s EEO Innovative Best Practices Grant Initiative.
 
-## How it works
+## Development
 
-| File | Purpose |
-| --- | --- |
-| `index.html` | The whole site — markup, styles and script inline, no build step. |
-| `404.html` | Branded not-found page served by GitHub Pages. |
-| `CNAME` | Custom domain (`eeodashboard.io`). |
-| `.github/workflows/static.yml` | Deploys the repo root to GitHub Pages on every push to `main`. |
+```sh
+npm ci
+npm run dev
+npm run build
+npm run test:e2e
+```
 
-The video is **streamed from Cloudflare Stream**, not served from this repo, so the
-site stays small and plays back well on campus networks. To point at a different
-video, replace the Cloudflare video ID in the `<iframe>` `src` in `index.html`
-(it also appears in the poster URL and the social-preview `og:image`/`twitter:image` tags).
+HashRouter supports direct links and refreshes on GitHub Pages. `src/config.ts` holds the external service links. Components, pages, and configuration are separated. No district records or authentication credentials are stored here. The public resource workspace routes users to the existing authenticated EEO Dashboard; this repository does not implement its backend or duplicate XpressTend’s financial services and native mobile layers.
 
-## Editing
+## Branding
 
-Open `index.html` in a browser — that's the full preview. No dependencies, no build.
+The unmodified three-color horizontal SVG in `public/brand/cccco-logo.svg` comes from https://www.cccco.edu/-/media/CCCCO-Website/Files/Communications/Brand/ccc-logos-horizontal . Display it with its original proportions and clear space. Self-hosted fonts are Crimson Text and Source Sans Pro (distributed by Google Fonts); navy #002F6D, darker blue #002755, gold #FFB600, and grey #555759 follow https://www.cccco.edu/About-Us/News-and-Media/Brand/assets/ . Gold is used decoratively or behind navy text, not as text on white.
 
-To swap the placeholder logo lockup for the official mark, commit the image as
-`cccco-logo.png` at the repo root; the page picks it up automatically.
+## Publishing
 
-## Conventions
+Pull requests run the production build. Merging into main builds `dist` and deploys it through the existing GitHub Pages workflow. `public/CNAME` preserves eeodashboard.io. The old stream is replaced by a new 100-second 1080p silent initiative film, with English captions, a transcript, and thematic chapter navigation. The video has no narration or music. The 11 districts appear only within the film, in a brief project showcase. `src/film.json` controls its storyline and `src/grantees.json` contains only short public-facing project summaries; see `docs/content-sources.md`. `scripts/render-film.py` reproduces the video using Pillow and ffmpeg with the official logo PNG. The externally hosted portal handles district permissions and sign-in.
 
-- Keep raw video files out of the repo (`.gitignore` blocks `*.mov` / `*.mp4`) —
-  upload them to Cloudflare Stream and reference the ID instead.
-- This is a public-sector site, so keep it accessible: every control reachable by
-  keyboard with a visible focus ring, the player `<iframe>` titled, and text
-  contrast at WCAG AA or better.
+The WebM fallback supports browsers without H.264 playback. The browser tests require `npx playwright install chromium --with-deps`.
