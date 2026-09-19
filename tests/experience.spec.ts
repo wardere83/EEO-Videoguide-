@@ -119,7 +119,7 @@ test("initiative priorities, district constellation, and funding story are inter
   await page.goto("/#/video");
   await expect(page.locator("video")).toHaveJSProperty("duration", 64);
   await expect(page.locator("video")).toHaveJSProperty("controls", false);
-  expect(await page.locator(".cinema").evaluate((element) => element.getBoundingClientRect().width)).toBeLessThanOrEqual(920);
+  expect(await page.locator(".initiative-video").evaluate((element) => element.getBoundingClientRect().width)).toBeLessThanOrEqual(920);
   await page
     .getByRole("button", { name: /05 Combined impact/ })
     .click();

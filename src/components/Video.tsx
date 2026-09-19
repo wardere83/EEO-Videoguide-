@@ -17,9 +17,7 @@ const chapters = [
 
 export function Video({ showChapters = false }: { showChapters?: boolean }) {
   const video = useRef<HTMLVideoElement>(null);
-  const cinema = useRef<HTMLDivElement>(null);
   const [playing, setPlaying] = useState(true);
-  const [cinemaVisible, setCinemaVisible] = useState(false);
   const [time, setTime] = useState(0);
   const [duration, setDuration] = useState(64);
   const [selected, setSelected] = useState(0);
@@ -29,32 +27,6 @@ export function Video({ showChapters = false }: { showChapters?: boolean }) {
     video.current.muted = true;
     video.current.defaultMuted = true;
     void video.current.play().catch(() => setPlaying(false));
-  }, []);
-
-  useEffect(() => {
-    const frame = cinema.current;
-    if (!frame) return;
-
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion) {
-      setCinemaVisible(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setCinemaVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.16 },
-    );
-    observer.observe(frame);
-
-    return () => {
-      observer.disconnect();
-    };
   }, []);
 
   function seek(next: number) {
@@ -84,15 +56,11 @@ export function Video({ showChapters = false }: { showChapters?: boolean }) {
       <div className="section-heading">
         <div>
           <span className="eyebrow">Funding to possibility</span>
-          <h2 id="story-title">The initiative in motion.</h2>
+          <h2 id="story-title">The initiative, explained.</h2>
         </div>
       </div>
 
-      <div
-        ref={cinema}
-        className={`cinema${cinemaVisible ? " is-visible" : ""}`}
-        data-playing={playing}
-      >
+      <div className="initiative-video">
         <video
           ref={video}
           autoPlay
@@ -114,10 +82,7 @@ export function Video({ showChapters = false }: { showChapters?: boolean }) {
           <track kind="captions" src="./media/eeo-initiative.en.vtt" srcLang="en" label="English" />
         </video>
 
-        <div className="cinema-sheen" aria-hidden="true" />
-        <div className="cinema-vignette" aria-hidden="true" />
-
-        <div className="cinema-controls">
+        <div className="initiative-video-controls">
           <button onClick={togglePlayback} aria-label={playing ? "Pause video" : "Play video"}>
             {playing ? <Pause size={17} /> : <Play size={17} fill="currentColor" />}
           </button>
