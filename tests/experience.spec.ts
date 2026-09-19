@@ -102,7 +102,7 @@ test("initiative priorities, district award graph, and funding story are interac
       .getByRole("link", { name: "Film", exact: true }),
   ).toHaveCount(0);
   await page.goto("/#/video");
-  await expect(page.locator("video")).toHaveJSProperty("duration", 88);
+  await expect(page.locator("video")).toHaveJSProperty("duration", 64);
   await expect(page.locator("video")).toHaveJSProperty("controls", false);
   await page
     .getByRole("button", { name: /05 Combined impact/ })
@@ -111,7 +111,7 @@ test("initiative priorities, district award graph, and funding story are interac
     .poll(async () =>
       page.locator("video").evaluate((v: HTMLVideoElement) => v.currentTime),
     )
-    .toBeGreaterThanOrEqual(44);
+    .toBeGreaterThanOrEqual(33);
   await expect(page.locator("video")).toHaveJSProperty("paused", false);
   await page.getByRole("tab", { name: /2026–28 \$1.4M/ }).click();
   await expect(page.getByRole("tabpanel")).toContainText("11 district awards");

@@ -7,19 +7,19 @@ import { DistrictGraph } from "./DistrictGraph";
 const media = "./media/eeo-initiative.mp4";
 const chapters = [
   { label: "Purpose", time: 0 },
-  { label: "Funding foundation", time: 8 },
-  { label: "First awards", time: 20 },
-  { label: "Current cycle", time: 32 },
-  { label: "Combined impact", time: 44 },
-  { label: "Districts", time: 54 },
-  { label: "Sustainable impact", time: 70 },
+  { label: "Funding foundation", time: 7 },
+  { label: "First awards", time: 15 },
+  { label: "Current cycle", time: 23 },
+  { label: "Combined impact", time: 33 },
+  { label: "Districts", time: 41 },
+  { label: "Sustainable impact", time: 49 },
 ];
 
 export function Video({ showChapters = false }: { showChapters?: boolean }) {
   const video = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(true);
   const [time, setTime] = useState(0);
-  const [duration, setDuration] = useState(88);
+  const [duration, setDuration] = useState(64);
   const [selected, setSelected] = useState(0);
 
   useEffect(() => {
