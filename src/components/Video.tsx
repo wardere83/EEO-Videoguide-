@@ -51,10 +51,9 @@ export function Video({ showChapters = false }: { showChapters?: boolean }) {
     <section className="width film" id="initiative-story" aria-labelledby="story-title">
       <div className="section-heading">
         <div>
-          <span className="eyebrow">EEO IBP · Funding to possibility</span>
+          <span className="eyebrow">Funding to possibility</span>
           <h2 id="story-title">The initiative in motion.</h2>
         </div>
-        <span className="silent-label">Silent experience</span>
       </div>
 
       <div className="cinema">

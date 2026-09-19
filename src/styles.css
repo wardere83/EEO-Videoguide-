@@ -735,7 +735,6 @@ footer {
 .film .section-heading { align-items: flex-end; margin-bottom: 22px; }
 .film .section-heading { width: min(100%, 920px); margin-inline: auto; }
 .film .section-heading h2 { font-size: clamp(30px, 3vw, 42px); margin-top: 8px; }
-.silent-label { color: var(--grey); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
 .cinema {
   width: min(100%, 920px);
   margin-inline: auto;
@@ -1011,7 +1010,6 @@ footer {
 }
 @media (max-width: 560px) {
   .film .section-heading { align-items: flex-start; }
-  .silent-label { display: none; }
   .cinema { border-radius: 14px; }
   .cinema-controls { left: 10px; right: 10px; bottom: 10px; opacity: 1; transform: none; }
   .story-chapters { display: flex; overflow-x: auto; }
