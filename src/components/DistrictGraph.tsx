@@ -5,12 +5,12 @@ import districts from "../grantees.json";
 const logos = ["ahc.png", "avc.svg", "citrus.svg", "kern.png", "mtsac.svg", "nocccd.svg", "peralta-seal.png", "sdccd.svg", "smc.svg", "scccd-mark.png", "wvm.svg"];
 const liftIds = new Set(["avc", "citrus", "peralta", "wvm"]);
 const impactWords = [
-  "Inclusive hiring",
-  "Mentorship pathways",
-  "Faculty development",
-  "Equitable recruitment",
-  "Workplace belonging",
-  "Evidence-led practice",
+  { display: "Recruit", label: "Equitable recruitment" },
+  { display: "Mentor", label: "Mentorship pathways" },
+  { display: "Develop", label: "Faculty development" },
+  { display: "Belong", label: "Workplace belonging" },
+  { display: "Advance", label: "Inclusive advancement" },
+  { display: "Sustain", label: "Evidence-led practice" },
 ];
 const pointY = [318, 338, 307, 332, 300, 326, 310, 340, 304, 334, 314];
 
@@ -45,21 +45,21 @@ export function DistrictGraph({ onEnterFilm }: { onEnterFilm: () => void }) {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = window.setInterval(() => setWord((current) => (current + 1) % impactWords.length), 2400);
+    const timer = window.setInterval(() => setWord((current) => (current + 1) % impactWords.length), 1900);
     return () => window.clearInterval(timer);
   }, []);
 
   return (
     <section ref={section} className={`impact-network${visible ? " is-visible" : ""}`} aria-labelledby="impact-network-title">
       <div className="impact-loop-panel">
-        <p className="eyebrow">Impact initiatives supported</p>
-        <h3>Districts will implement</h3>
-        <div className="impact-word-window" aria-label={`Current impact initiative: ${impactWords[word]}`}>
-          <span key={impactWords[word]}>{impactWords[word]}</span>
-        </div>
-        <p className="impact-loop-copy">One statewide initiative supporting locally designed work with lasting institutional value.</p>
-        <div className="impact-loop-progress" aria-hidden="true">
-          {impactWords.map((item, index) => <i className={index === word ? "active" : ""} key={item} />)}
+        <div className="impact-word-window" aria-label={`Current impact initiative: ${impactWords[word].label}`}>
+          <span className="impact-reel-arrow" aria-hidden="true">→</span>
+          <div className="impact-word-reel" key={word} aria-hidden="true">
+            {[-3, -2, -1, 0, 1, 2, 3].map((offset) => {
+              const item = impactWords[(word + offset + impactWords.length) % impactWords.length];
+              return <span className={offset === 0 ? "active" : ""} key={`${word}-${offset}`}>{item.display}</span>;
+            })}
+          </div>
         </div>
       </div>
 
